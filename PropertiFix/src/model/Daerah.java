@@ -10,12 +10,20 @@ package model;
  * @author jason
  */
 public class Daerah {
+    private String provinsi;
     private String kota;
-    private String daerah;
 
-    public Daerah(String kota, String daerah) {
+    public Daerah(String provinsi, String kota) {
+        this.provinsi = provinsi;
         this.kota = kota;
-        this.daerah = daerah;
+    }
+
+    public String getProvinsi() {
+        return provinsi;
+    }
+
+    public void setProvinsi(String provinsi) {
+        this.provinsi = provinsi;
     }
 
     public String getKota() {
@@ -26,13 +34,7 @@ public class Daerah {
         this.kota = kota;
     }
 
-    public String getDaerah() {
-        return daerah;
-    }
-
-    public void setDaerah(String daerah) {
-        this.daerah = daerah;
-    }
+    
     
     
 }
