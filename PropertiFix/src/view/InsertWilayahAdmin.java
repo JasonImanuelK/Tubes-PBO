@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Wilayah;
+import controller.MethodWilayah;
 
 /**
  *
@@ -28,6 +30,8 @@ public class InsertWilayahAdmin {
     JTextField txtProvinsi,txtKota,txtDeskripsi;
     
     public InsertWilayahAdmin(){
+        MethodWilayah met = new MethodWilayah();
+        
         //Frame
         frame = new JFrame("Input Wilayah Baru");
         frame.setSize(330, 430);
@@ -67,9 +71,18 @@ public class InsertWilayahAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!txtProvinsi.getText().equals("") || !txtKota.getText().equals("")||!txtDeskripsi.getText().equals("")){
-                    //insert ke table.
+                    frame.setVisible(false);
+                    Wilayah newWilayah = new Wilayah(txtProvinsi.getText(),txtKota.getText(),txtDeskripsi.getText());
+                    boolean hasil = met.insertWilayahBaru(newWilayah);
+                    if(hasil){
+                        JOptionPane.showMessageDialog(null, "Data sudah diproses.", "Input Wilayah", JOptionPane.INFORMATION_MESSAGE);                                          
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Data gagal dimasukan.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
+                    
                     JOptionPane.showMessageDialog(null, "Tolong isi dulu textfieldnya !", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
