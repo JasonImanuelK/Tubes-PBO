@@ -15,7 +15,7 @@ public class User extends Person{
     private Status status;
     private Member member;
     
-    User(String nama,String noTelp,String password,String email,Status status,Member member){
+    public User(String nama,String noTelp,String password,String email,Status status,Member member){
         super(nama,noTelp);
         this.password = password;
         this.email = email;
