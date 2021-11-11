@@ -10,5 +10,5 @@ package model;
  * @author patri
  */
 public enum Member {
-    Bronze,Silver,Gold;
+    BRONZE, SILVER, GOLD;
 }

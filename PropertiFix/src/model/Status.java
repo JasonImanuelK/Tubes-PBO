@@ -10,5 +10,5 @@ package model;
  * @author patri
  */
 public enum Status {
-    User,Admin;
+    USER, ADMIN;
 }
