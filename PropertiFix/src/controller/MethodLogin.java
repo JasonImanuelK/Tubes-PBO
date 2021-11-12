@@ -12,6 +12,7 @@ import java.sql.Statement;
 import model.User;
 import model.Member;
 import model.Status;
+import model.UserSingeltonManager;
 
 /**
  *
@@ -24,8 +25,23 @@ public class MethodLogin {
         conn.connect();
     }
     
+    private String getMember(int idPengguna){
+        String query = "SELECT statusMember FROM member WHERE idPengguna = ? ";
+        String member = "";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, idPengguna);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            member = rs.getString("statusMember");  
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return member;
+    }
+    
     public boolean checkUser(String inputUsername, String inputPassword) {
-        String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM user WHERE nama = ? AND password = ?";
         boolean checkUser = true;
         Member memberEnum = Member.BRONZE;
         Status statusEnum = Status.ADMIN;
@@ -34,9 +50,9 @@ public class MethodLogin {
             stmt.setString(1, inputUsername);
             stmt.setString(2, inputPassword);
             ResultSet rs = stmt.executeQuery();
-            if (rs == null) {
+            if (rs != null) {
                 while (rs.next()) {
-                    String member = rs.getString("member");
+                    String member = getMember(rs.getInt("idPengguna"));
                     if (member.equals("BRONZE")) {
                         memberEnum = Member.BRONZE;       
                     }else if (member.equals("SILVER")) {
@@ -52,6 +68,8 @@ public class MethodLogin {
                         statusEnum = Status.USER;
                     }
                     User user = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum, memberEnum);
+                    UserSingeltonManager instance = UserSingeltonManager.getInstance();
+                    instance.setUser(user);
                 }
             }else{
                 checkUser = false;

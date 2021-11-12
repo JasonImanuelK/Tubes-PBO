@@ -15,8 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import model.User;
+import model.UserSingeltonManager;
 
 /**
  *
@@ -26,7 +28,8 @@ public class Login {
     JFrame frame;
     JPanel panel;
     JLabel labelJudul, labelUsername, labelPassword;
-    JTextField textFieldUsername, textFieldPassword;
+    JTextField textFieldUsername;
+    JPasswordField passFieldPassword;
     JButton buttonLogin, buttonRegister;
     MethodLogin methodLogin = new MethodLogin();
     
@@ -44,7 +47,7 @@ public class Login {
         //Label
         labelJudul = new JLabel("Login");
         labelJudul.setFont(new Font("Sans-Serif", Font.BOLD, 26));
-        labelJudul.setBounds(50, 30, 200, 40);
+        labelJudul.setBounds(120, 30, 200, 40);
         labelUsername = new JLabel("Username");
         labelUsername.setFont(new Font("Sans-Serif", Font.BOLD, 14));
         labelUsername.setBounds(30, 90, 100, 40);
@@ -55,8 +58,8 @@ public class Login {
         //TextField
         textFieldUsername = new JTextField();
         textFieldUsername.setBounds(130, 98, 150, 30);
-        textFieldPassword = new JTextField();
-        textFieldPassword.setBounds(130, 148, 150, 30);
+        passFieldPassword = new JPasswordField();
+        passFieldPassword.setBounds(130, 148, 150, 30);
         
         //Button
         buttonLogin = new JButton("Login");
@@ -66,10 +69,10 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 if (textFieldUsername.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Username Belum Diisi!", "Login", JOptionPane.INFORMATION_MESSAGE);
-                }else if (textFieldPassword.getText().equals("")) {
+                }else if (passFieldPassword.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Password Belum Diisi!", "Login", JOptionPane.INFORMATION_MESSAGE);
                 }else{
-                    boolean checkUser = methodLogin.checkUser(textFieldUsername.getText(), textFieldPassword.getText());
+                    boolean checkUser = methodLogin.checkUser(textFieldUsername.getText(), new String(passFieldPassword.getPassword()));
                     if (checkUser) {
                         frame.setVisible(false);
                         JOptionPane.showMessageDialog(null, "Login Berhasil", "Login", JOptionPane.INFORMATION_MESSAGE);
@@ -104,8 +107,8 @@ public class Login {
         panel.add(labelUsername);
         panel.add(labelPassword);
         panel.add(textFieldUsername);
-        panel.add(textFieldPassword);
+        panel.add(passFieldPassword);
         panel.add(buttonLogin);
-        panel.add(buttonRegister);
+        panel.add(buttonRegister);   
     }
 }
