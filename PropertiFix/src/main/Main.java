@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package main;
+
+import model.UserSingeltonManager;
+
 /**
  *
  * @author patri
