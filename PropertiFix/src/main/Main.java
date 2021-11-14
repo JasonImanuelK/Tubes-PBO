@@ -17,6 +17,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new view.Login();
+        new view.InsertWilayahAdmin();
+        //new view.TampilanWilayah();
+        //new view.Login();
     }
 }

@@ -11,7 +11,7 @@ package model;
  */
 public class UserSingeltonManager {
     private static UserSingeltonManager instance;
-    private User user;
+    private Person person;
     
     public static UserSingeltonManager getInstance(){
         if (instance == null) {
@@ -20,11 +20,13 @@ public class UserSingeltonManager {
         return instance;
     }
 
-    public User getUser() {
-        return user;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPerson(Person person) {
+        this.person = person;
     }
+
+    
 }

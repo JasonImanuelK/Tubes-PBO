@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Wilayah;
 import controller.MethodWilayah;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -27,7 +28,8 @@ public class InsertWilayahAdmin {
     JPanel panel;
     JLabel labelJudul,labelProvinsi,labelKota,labelDeskripsi;
     JButton btnSubmit;
-    JTextField txtProvinsi,txtKota,txtDeskripsi;
+    JTextField txtProvinsi,txtKota;
+    JTextArea txtDeskripsi;
     
     public InsertWilayahAdmin(){
         MethodWilayah met = new MethodWilayah();
@@ -61,7 +63,8 @@ public class InsertWilayahAdmin {
         txtProvinsi.setBounds(130, 90, 150, 30);
         txtKota = new JTextField();
         txtKota.setBounds(130, 140, 150, 30);
-        txtDeskripsi = new JTextField();
+        txtDeskripsi = new JTextArea();
+        txtDeskripsi.setLineWrap(true);
         txtDeskripsi.setBounds(130, 190, 150, 130);
         
         //Button

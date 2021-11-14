@@ -9,28 +9,61 @@ package model;
  *
  * @author patri
  */
-abstract class Person {
+public abstract class Person {
     private String nama;
     private String noTelp;
+    private String password;
+    private String email;
+    private Status status;
+
     
-    Person(String nama,String noTelp){
+    public Person(String nama, String noTelp, String password, String email, Status status) {
         this.nama = nama;
         this.noTelp = noTelp;
+        this.password = password;
+        this.email = email;
+        this.status = status;
     }
-    
-    public String getNama(){
+
+    public String getNama() {
         return nama;
     }
-    
-    public String getNoTelp(){
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getNoTelp() {
         return noTelp;
     }
-    
-    public void setNama(String n){
-        this.nama = n;
+
+    public void setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
     
-    public void setNoTelp(String t){
-        this.noTelp = t;
-    }
+    
 }
