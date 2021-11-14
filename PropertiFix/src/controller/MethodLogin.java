@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import model.User;
+import model.Admin;
+import model.Person;
 import model.Member;
 import model.Status;
 import model.UserSingeltonManager;
@@ -45,6 +47,7 @@ public class MethodLogin {
         boolean checkUser = true;
         Member memberEnum = Member.BRONZE;
         Status statusEnum = Status.ADMIN;
+        Person person = null;
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, inputUsername);
@@ -53,23 +56,26 @@ public class MethodLogin {
             if (rs != null) {
                 while (rs.next()) {
                     String member = getMember(rs.getInt("idPengguna"));
-                    if (member.equals("BRONZE")) {
-                        memberEnum = Member.BRONZE;       
-                    }else if (member.equals("SILVER")) {
-                        memberEnum = Member.SILVER;
-                    }else if (member.equals("GOLD")) {
-                        memberEnum = Member.GOLD;
-                    }
+                    
                     
                     String status = rs.getString("status");
                     if (status.equals("ADMIN")) {
                         statusEnum = Status.ADMIN;
-                    }else if (status.equals("ADMIN")) {
+                        person = new Admin(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum);
+                    }else if (status.equals("USER")) {
                         statusEnum = Status.USER;
+                        if (member.equals("BRONZE")) {
+                            memberEnum = Member.BRONZE;       
+                        }else if (member.equals("SILVER")) {
+                            memberEnum = Member.SILVER;
+                        }else if (member.equals("GOLD")) {
+                            memberEnum = Member.GOLD;
+                        }
+                        person = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum, memberEnum);
                     }
-                    User user = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum, memberEnum);
+                   
                     UserSingeltonManager instance = UserSingeltonManager.getInstance();
-                    instance.setUser(user);
+                    instance.setPerson(person);
                 }
             }else{
                 checkUser = false;
