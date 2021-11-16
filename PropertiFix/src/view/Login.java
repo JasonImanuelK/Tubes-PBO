@@ -74,7 +74,7 @@ public class Login {
                 }else{
                     boolean checkUser = methodLogin.checkUser(textFieldUsername.getText(), new String(passFieldPassword.getPassword()));
                     if (checkUser) {
-                        frame.setVisible(false);
+                        frame.dispose();
                         JOptionPane.showMessageDialog(null, "Login Berhasil", "Login", JOptionPane.INFORMATION_MESSAGE);
 //                        new MainMenuUser();
                     }else{
@@ -91,8 +91,8 @@ public class Login {
         buttonRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-//                new Register();
+                frame.dispose();
+                new Registrasi();
             }
         });
         

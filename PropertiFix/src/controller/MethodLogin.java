@@ -56,8 +56,6 @@ public class MethodLogin {
             if (rs != null) {
                 while (rs.next()) {
                     String member = getMember(rs.getInt("idPengguna"));
-                    
-                    
                     String status = rs.getString("status");
                     if (status.equals("ADMIN")) {
                         statusEnum = Status.ADMIN;
