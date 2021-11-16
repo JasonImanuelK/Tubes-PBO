@@ -10,5 +10,5 @@ package model;
  * @author Aloysius
  */
 public enum StatusJualSewa {
-    JUAL, BELI;
+    JUAL, SEWA;
 }

@@ -10,5 +10,5 @@ package model;
  * @author patri
  */
 public enum Status_Pembayaran {
-    Lunas,Belum_Lunas;
+    LUNAS, BERSISA;
 }
