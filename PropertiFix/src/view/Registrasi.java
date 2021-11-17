@@ -20,7 +20,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import model.Member;
 import model.Person;
-import model.Status;
+import model.StatusPerson;
 import model.User;
 
 /**
@@ -89,7 +89,7 @@ public class Registrasi {
                     System.out.println(checkPassword.length());
                     JOptionPane.showMessageDialog(null, "Password kurang dari 8 huruf!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);  
                 }else{
-                    Person person = new User(textFieldNama.getText(), textFieldNomorTelepon.getText(), passFieldPassword.getText(), textFieldEmail.getText(), Status.USER, Member.BRONZE);                                                                                                   
+                    Person person = new User(textFieldNama.getText(), textFieldNomorTelepon.getText(), passFieldPassword.getText(), textFieldEmail.getText(), StatusPerson.USER, Member.BRONZE);                                                                                                   
                     boolean tanya = methodRegistrasi.inputDataUser(person);
                     if (tanya) {
                         JOptionPane.showMessageDialog(null, "Akun Anda Sudah Terdaftar!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);  

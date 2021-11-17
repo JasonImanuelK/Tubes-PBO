@@ -13,7 +13,7 @@ import model.User;
 import model.Admin;
 import model.Person;
 import model.Member;
-import model.Status;
+import model.StatusPerson;
 import model.UserSingeltonManager;
 
 /**
@@ -44,9 +44,7 @@ public class MethodLogin {
     
     public boolean checkUser(String inputUsername, String inputPassword) {
         String query = "SELECT * FROM user WHERE nama = ? AND password = ?";
-        boolean checkUser = true;
-        Member memberEnum = Member.BRONZE;
-        Status statusEnum = Status.ADMIN;
+        StatusPerson statusEnum;
         Person person = null;
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
@@ -57,30 +55,21 @@ public class MethodLogin {
                 while (rs.next()) {
                     String status = rs.getString("status");
                     if (status.equals("ADMIN")) {
-                        statusEnum = Status.ADMIN;
+                        statusEnum = StatusPerson.ADMIN;
                         person = new Admin(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum);
                     }else if (status.equals("USER")) {
                         String member = getMember(rs.getInt("idPengguna"));
-                        statusEnum = Status.USER;
-                        if (member.equals("BRONZE")) {
-                            memberEnum = Member.BRONZE;       
-                        }else if (member.equals("SILVER")) {
-                            memberEnum = Member.SILVER;
-                        }else if (member.equals("GOLD")) {
-                            memberEnum = Member.GOLD;
-                        }
-                        person = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum, memberEnum);
+                        person = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), StatusPerson.USER, Member.valueOf(member));
                     }
                    
                     UserSingeltonManager instance = UserSingeltonManager.getInstance();
                     instance.setPerson(person);
+                    return true;
                 }
-            }else{
-                checkUser = false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return checkUser;
+        return false;
     }
 }
