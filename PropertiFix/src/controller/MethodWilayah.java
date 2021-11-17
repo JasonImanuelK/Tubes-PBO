@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import model.Daerah;
 import model.Wilayah;
 
 public class MethodWilayah {
@@ -13,8 +15,25 @@ public class MethodWilayah {
         conn.connect();
     }
     
-    public int getIdDaerah() {
-        String query = "select idDaerah from daerah ORDER BY idDaerah DESC LIMIT 2";
+    public ArrayList<Daerah> getSemuaDaerah(){
+        String query = "SELECT * FROM daerah";
+        ArrayList<Daerah> listDaerah= new ArrayList<>(); 
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                listDaerah.add(new Daerah(rs.getString("provinsi"),rs.getString("kota")));
+            };
+            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listDaerah;
+    }
+    
+    public int getIdDaerahTerakhir() {
+        String query = "SELECT idDaerah FROM daerah ORDER BY idDaerah DESC LIMIT 2";
         int jumlah = 0;
         try {
             Statement stmt = conn.con.createStatement();
@@ -42,7 +61,7 @@ public class MethodWilayah {
             hasil = false;
         }
         
-        int jumlah = getIdDaerah();
+        int jumlah = getIdDaerahTerakhir();
         
         query = "INSERT INTO wilayah VALUES (?,?)";
         try {

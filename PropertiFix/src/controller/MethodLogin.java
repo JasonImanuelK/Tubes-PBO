@@ -55,12 +55,12 @@ public class MethodLogin {
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-                    String member = getMember(rs.getInt("idPengguna"));
                     String status = rs.getString("status");
                     if (status.equals("ADMIN")) {
                         statusEnum = Status.ADMIN;
                         person = new Admin(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum);
                     }else if (status.equals("USER")) {
+                        String member = getMember(rs.getInt("idPengguna"));
                         statusEnum = Status.USER;
                         if (member.equals("BRONZE")) {
                             memberEnum = Member.BRONZE;       
