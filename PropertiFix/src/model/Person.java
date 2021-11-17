@@ -14,10 +14,10 @@ public abstract class Person {
     private String noTelp;
     private String password;
     private String email;
-    private Status status;
+    private StatusPerson status;
 
     
-    public Person(String nama, String noTelp, String password, String email, Status status) {
+    public Person(String nama, String noTelp, String password, String email, StatusPerson status) {
         this.nama = nama;
         this.noTelp = noTelp;
         this.password = password;
@@ -57,11 +57,11 @@ public abstract class Person {
         this.email = email;
     }
 
-    public Status getStatus() {
+    public StatusPerson getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(StatusPerson status) {
         this.status = status;
     }
     

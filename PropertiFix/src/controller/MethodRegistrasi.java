@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import model.Member;
 import model.Person;
-import model.Status;
+import model.StatusPerson;
 import model.User;
 import model.UserSingeltonManager;
 
@@ -33,7 +33,7 @@ public class MethodRegistrasi {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, person.getPassword());
             stmt.setString(2, person.getEmail());
-            if (person.getStatus().equals(Status.USER)) {
+            if (person.getStatus().equals(StatusPerson.USER)) {
                 status = "USER";
             }
             stmt.setString(3, status);

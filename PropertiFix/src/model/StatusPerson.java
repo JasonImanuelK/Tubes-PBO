@@ -9,6 +9,6 @@ package model;
  *
  * @author patri
  */
-public enum Status {
+public enum StatusPerson {
     USER, ADMIN;
 }
