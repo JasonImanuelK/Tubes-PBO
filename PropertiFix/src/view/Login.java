@@ -76,7 +76,8 @@ public class Login {
                     if (checkUser) {
                         frame.dispose();
                         JOptionPane.showMessageDialog(null, "Login Berhasil", "Login", JOptionPane.INFORMATION_MESSAGE);
-//                        new MainMenuUser();
+                        //Hans inigw masukin menu admin buat coba doang , kl nanti ceknya dr checkUser aja returnnya ganti ke int jangan boolean ty.
+                        new MenuAdmin();
                     }else{
                         JOptionPane.showMessageDialog(null, "Username/Password Tidak Ditemukan!", "Login", JOptionPane.INFORMATION_MESSAGE);
                         JOptionPane.showMessageDialog(null, "Silahkan Melakukan Register Jika Belum Memiliki Akun", "Login", JOptionPane.INFORMATION_MESSAGE);

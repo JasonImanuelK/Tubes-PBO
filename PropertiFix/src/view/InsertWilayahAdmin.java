@@ -27,11 +27,11 @@ public class InsertWilayahAdmin {
     JFrame frame;
     JPanel panel;
     JLabel labelJudul,labelProvinsi,labelKota,labelDeskripsi;
-    JButton btnSubmit;
+    JButton btnSubmit,btnBack;
     JTextField txtProvinsi,txtKota;
     JTextArea txtDeskripsi;
     
-    public InsertWilayahAdmin(){
+    public InsertWilayahAdmin(JFrame frameMenu){
         MethodWilayah met = new MethodWilayah();
         
         //Frame
@@ -90,6 +90,15 @@ public class InsertWilayahAdmin {
                 }
             }
         });
+        btnBack = new JButton("Back");
+        btnBack.setBounds(170, 340, 100, 30);
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                frameMenu.setVisible(true);
+            }
+        });
         
         panel.setLayout(null);
         panel.setVisible(true);
@@ -106,6 +115,7 @@ public class InsertWilayahAdmin {
         panel.add(txtKota);
         panel.add(txtDeskripsi);
         panel.add(btnSubmit);
+        panel.add(btnBack);
         
     }
 }

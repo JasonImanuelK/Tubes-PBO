@@ -6,10 +6,15 @@
 package view;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import model.Daerah;
+import controller.MethodWilayah;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
 
 /**
  *
@@ -18,9 +23,15 @@ import javax.swing.JScrollPane;
 public class TampilanWilayah {
     JFrame frame;
     JScrollPane sPanel;
-    JPanel mainPanel,panel;
+    JPanel mainPanel,panelButton;
     JLabel label;
-    public TampilanWilayah(){
+    ArrayList<JPanel> panelDaerah= new ArrayList<>();
+    ArrayList<JButton> btnDeleteDaerah= new ArrayList<>();
+    ArrayList<JLabel> labelKota= new ArrayList<>();
+    ArrayList<JLabel> labelProvinsi = new ArrayList<>();
+    ArrayList<JLabel> labelDeskripsi= new ArrayList<>();
+    MethodWilayah met = new MethodWilayah();
+    public TampilanWilayah(JFrame frameMenu){
         //Frame
         frame = new JFrame("Deskripsi Wilayah");
         frame.setSize(400, 600);
@@ -31,24 +42,30 @@ public class TampilanWilayah {
         mainPanel.setSize(400, 600);
         mainPanel.setBackground(new Color(201, 248, 201));
         
-        panel = new JPanel();
-        panel.setSize(200, 800);
-        panel.setBackground(new Color(201, 248, 251));
+        ArrayList <Daerah> listDaerah = met.getSemuaDaerah();
+        for(int i = 0;i < listDaerah.size();i++){
+            panelDaerah.add(new JPanel());
+            panelDaerah.get(panelDaerah.size()-1).setBounds(0,i*200,200,200);
+        }
+        
+        panelButton = new JPanel();
+        panelButton.setSize(500, 600);
+        panelButton.setBackground(new Color(201, 248, 251));
         
         //label
         label = new JLabel("makan bang.");
         label.setBounds(60,60,60,60);
         
-        mainPanel.setLayout(null);
+        mainPanel.setLayout(new FlowLayout());
         mainPanel.setVisible(true);
-        panel.setLayout(null);
-        panel.setVisible(true);
+        panelButton.setLayout(null);
+        panelButton.setVisible(true);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setVisible(true);
         
-        panel.add(label);
-        mainPanel.add(panel);
+        panelButton.add(label);
+        mainPanel.add(panelButton);
         sPanel = new JScrollPane(mainPanel);
         sPanel.setSize(400, 600);
         frame.add(sPanel);
