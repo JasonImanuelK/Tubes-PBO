@@ -41,7 +41,7 @@ public class Registrasi {
         //Frame
         frame = new JFrame("Registrasi");
         frame.setSize(330, 430);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        windowClosingListener(frame);
 
         //Panel
         panel = new JPanel();
@@ -83,21 +83,19 @@ public class Registrasi {
         buttonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                String checkPassword = new String (passFieldPassword.getPassword());
+                String checkPassword = String.valueOf(passFieldPassword.getPassword());
                 if (checkPassword.length() < 8) {
-                    System.out.println(checkPassword.length());
                     JOptionPane.showMessageDialog(null, "Password kurang dari 8 huruf!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);  
                 }else{
-                    Person person = new User(textFieldNama.getText(), textFieldNomorTelepon.getText(), passFieldPassword.getText(), textFieldEmail.getText(), StatusPerson.USER, Member.BRONZE);                                                                                                   
-                    boolean tanya = methodRegistrasi.inputDataUser(person);
-                    if (tanya) {
-                        JOptionPane.showMessageDialog(null, "Akun Anda Sudah Terdaftar!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);  
+                    Person person = new User(textFieldNama.getText(), textFieldNomorTelepon.getText(), String.valueOf(passFieldPassword.getPassword()), textFieldEmail.getText(), StatusPerson.USER, Member.BRONZE);                                                                                                   
+                    if (methodRegistrasi.inputDataUser(person)) {
+                        frame.dispose();
+                        JOptionPane.showMessageDialog(null, "Akun Anda Sudah Terdaftar!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);
+//                        new MainMenu();
                     }else{
                         JOptionPane.showMessageDialog(null, "Gagal Registrasi!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);  
                     }
-                }   
-//                new MainMenu();
+                }
             }
         });
         
@@ -111,6 +109,7 @@ public class Registrasi {
                 new Login();
             }
         });
+        
         
         panel.setLayout(null);
         panel.setVisible(true);
@@ -130,5 +129,15 @@ public class Registrasi {
         panel.add(passFieldPassword);
         panel.add(buttonLogin);
         panel.add(buttonBack);
+    }
+    
+    void windowClosingListener(JFrame frame) {
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                frame.dispose();
+                new Login();
+            }
+        });
     }
 }

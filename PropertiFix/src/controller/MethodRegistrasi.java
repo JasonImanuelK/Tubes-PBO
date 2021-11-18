@@ -27,60 +27,39 @@ public class MethodRegistrasi {
     }
     
     public boolean inputDataUser(Person person) {
-        String query = "INSERT INTO user (password, email, status, nama, noTelp) VALUES (?,?,?,?,?)";
-        String status = "", member = "";
+        String query = "INSERT INTO person (password, email, nama, noTelp) VALUES (?,?,?,?)";
+        
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, person.getPassword());
             stmt.setString(2, person.getEmail());
-            if (person.getStatus().equals(StatusPerson.USER)) {
-                status = "USER";
-            }
-            stmt.setString(3, status);
-            stmt.setString(4, person.getNama());
-            stmt.setString(5, person.getNoTelp());
+            stmt.setString(3, person.getNama());
+            stmt.setString(4, person.getNoTelp());
+            //statusPerson dan member otomatis terisi 'USER' dan 'BRONZE'
             stmt.executeUpdate();
-            if (((User)person).getMember().equals(Member.BRONZE)) {
-                member = "BRONZE";
-            }
-            boolean hasil = inputDataMember(member);
-            if (hasil) {
-                UserSingeltonManager instance = UserSingeltonManager.getInstance();
-                instance.setPerson(person);
-            }
-            return(hasil);
+            
+            UserSingeltonManager instance = UserSingeltonManager.getInstance();
+            instance.setPerson(person);
+            
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return(false);
         }       
     }
     
-    private boolean inputDataMember(String member) {
-        String query = "INSERT INTO member VALUES (?, ?)";
-        int idPengguna = getIdPengguna();
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setInt(1, idPengguna);
-            stmt.setString(2, member);
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
     
-    private int getIdPengguna() {
-        String query = "SELECT idPengguna FROM user ORDER BY idPengguna DESC LIMIT 2";
-        int idPengguna = 0;
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            rs.next();
-            idPengguna = rs.getInt("idPengguna");  
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return idPengguna;
-    }
+//    private int getIdPengguna() {
+//        String query = "SELECT idPengguna FROM person ORDER BY idPengguna DESC LIMIT 2";
+//        int idPengguna = 0;
+//        try {
+//            Statement stmt = conn.con.createStatement();
+//            ResultSet rs = stmt.executeQuery(query);
+//            rs.next();
+//            idPengguna = rs.getInt("idPengguna");  
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return idPengguna;
+//    }
 }

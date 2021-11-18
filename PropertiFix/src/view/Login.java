@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.Admin;
 import model.User;
 import model.UserSingeltonManager;
 
@@ -67,17 +69,19 @@ public class Login {
         buttonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (textFieldUsername.getText().equals("")) {
+                if (textFieldUsername.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Username Belum Diisi!", "Login", JOptionPane.INFORMATION_MESSAGE);
-                }else if (passFieldPassword.getText().equals("")) {
+                }else if (Arrays.toString(passFieldPassword.getPassword()).isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Password Belum Diisi!", "Login", JOptionPane.INFORMATION_MESSAGE);
                 }else{
-                    boolean checkUser = methodLogin.checkUser(textFieldUsername.getText(), new String(passFieldPassword.getPassword()));
-                    if (checkUser) {
+                    if (methodLogin.checkUser(textFieldUsername.getText(), new String(passFieldPassword.getPassword()))) {
                         frame.dispose();
                         JOptionPane.showMessageDialog(null, "Login Berhasil", "Login", JOptionPane.INFORMATION_MESSAGE);
                         //Hans inigw masukin menu admin buat coba doang , kl nanti ceknya dr checkUser aja returnnya ganti ke int jangan boolean ty.
-                        new MenuAdmin();
+                        if(UserSingeltonManager.getInstance().getPerson() instanceof Admin){
+                            new MenuAdmin();
+                        }
+                        
                     }else{
                         JOptionPane.showMessageDialog(null, "Username/Password Tidak Ditemukan!", "Login", JOptionPane.INFORMATION_MESSAGE);
                         JOptionPane.showMessageDialog(null, "Silahkan Melakukan Register Jika Belum Memiliki Akun", "Login", JOptionPane.INFORMATION_MESSAGE);
