@@ -27,23 +27,8 @@ public class MethodLogin {
         conn.connect();
     }
     
-    private String getMember(int idPengguna){
-        String query = "SELECT statusMember FROM member WHERE idPengguna = ? ";
-        String member = "";
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setInt(1, idPengguna);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            member = rs.getString("statusMember");  
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return member;
-    }
-    
     public boolean checkUser(String inputUsername, String inputPassword) {
-        String query = "SELECT * FROM user WHERE nama = ? AND password = ?";
+        String query = "SELECT * FROM person WHERE nama = ? AND password = ?";
         StatusPerson statusEnum;
         Person person = null;
         try {
@@ -53,13 +38,13 @@ public class MethodLogin {
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-                    String status = rs.getString("status");
-                    if (status.equals("ADMIN")) {
+                    StatusPerson status = StatusPerson.valueOf(rs.getString("statusPerson"));
+                    if (status.equals(StatusPerson.ADMIN) ) {
                         statusEnum = StatusPerson.ADMIN;
                         person = new Admin(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), statusEnum);
-                    }else if (status.equals("USER")) {
-                        String member = getMember(rs.getInt("idPengguna"));
-                        person = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), StatusPerson.USER, Member.valueOf(member));
+                    }else if (status.equals(StatusPerson.USER)) {
+                        Member member = Member.valueOf(rs.getString("member"));
+                        person = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), StatusPerson.USER, member);
                     }
                    
                     UserSingeltonManager instance = UserSingeltonManager.getInstance();
