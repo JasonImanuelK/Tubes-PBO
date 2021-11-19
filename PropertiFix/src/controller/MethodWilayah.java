@@ -32,6 +32,39 @@ public class MethodWilayah {
         return listDaerah;
     }
     
+    public boolean deleteWilayah(String kota){
+        String query = "DELETE FROM daerah WHERE kota = ?";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, kota);
+            stmt.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public ArrayList<Wilayah> getSemuaWilayah(){
+        String query = "SELECT * FROM daerah";
+        ArrayList<Wilayah> listWilayah= new ArrayList<>(); 
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            String query2 = "SELECT deskripsiWilayah FROM wilayah";
+            Statement stmt2 = conn.con.createStatement();
+            ResultSet rs2 = stmt2.executeQuery(query2);
+            while(rs.next() && rs2.next()){
+                listWilayah.add(new Wilayah(rs.getString("provinsi"),rs.getString("kota"),rs2.getString("deskripsiWilayah")));
+            };
+            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listWilayah;
+    }
+    
     public ArrayList<String> getStringDaerah(){
         String query = "SELECT * FROM daerah";
         ArrayList<String> listDaerah= new ArrayList<>(); 
