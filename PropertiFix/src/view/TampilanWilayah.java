@@ -14,7 +14,13 @@ import javax.swing.JScrollPane;
 import model.Daerah;
 import controller.MethodWilayah;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import model.Wilayah;
 
 /**
  *
@@ -22,53 +28,58 @@ import javax.swing.JButton;
  */
 public class TampilanWilayah {
     JFrame frame;
-    JScrollPane sPanel;
-    JPanel mainPanel,panelButton;
-    JLabel label;
-    ArrayList<JPanel> panelDaerah= new ArrayList<>();
-    ArrayList<JButton> btnDeleteDaerah= new ArrayList<>();
-    ArrayList<JLabel> labelKota= new ArrayList<>();
-    ArrayList<JLabel> labelProvinsi = new ArrayList<>();
-    ArrayList<JLabel> labelDeskripsi= new ArrayList<>();
+    JPanel panelButton;
+    JButton btnBack;
     MethodWilayah met = new MethodWilayah();
     public TampilanWilayah(JFrame frameMenu){
         //Frame
         frame = new JFrame("Deskripsi Wilayah");
-        frame.setSize(400, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Panel
-        mainPanel = new JPanel();
-        mainPanel.setSize(400, 600);
-        mainPanel.setBackground(new Color(201, 248, 201));
-        
-        ArrayList <Daerah> listDaerah = met.getSemuaDaerah();
-        for(int i = 0;i < listDaerah.size();i++){
-            panelDaerah.add(new JPanel());
-            panelDaerah.get(panelDaerah.size()-1).setBounds(0,i*200,200,200);
-        }
         
         panelButton = new JPanel();
-        panelButton.setSize(500, 600);
+        panelButton.setSize(200, 200);
         panelButton.setBackground(new Color(201, 248, 251));
         
-        //label
-        label = new JLabel("makan bang.");
-        label.setBounds(60,60,60,60);
-        
-        mainPanel.setLayout(new FlowLayout());
-        mainPanel.setVisible(true);
-        panelButton.setLayout(null);
+        btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                frameMenu.setVisible(true);
+            }
+        });
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        ArrayList <Wilayah> listWilayah = met.getSemuaWilayah();
+        for(int i = 0;i < listWilayah.size();i++){
+            JLabel labelProvinsi = new JLabel(listWilayah.get(i).getProvinsi());
+            JLabel labelKota = new JLabel(listWilayah.get(i).getKota());
+            JLabel labelDeskripsi = new JLabel(listWilayah.get(i).getDeskripsiWilayah());
+            JButton btnDelete = new JButton("Delete");
+            btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean hasil = met.deleteWilayah(labelKota.getText());
+                if(hasil){
+                    JOptionPane.showMessageDialog(null, "Wilayah sudah dihapus.", "Deleted", JOptionPane.INFORMATION_MESSAGE);                                          
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Wilayah gagal dihapus.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                btnDelete.setEnabled(false);
+            }
+            });
+            frame.add(new GroupPanel(i,labelProvinsi,labelKota,labelDeskripsi,btnDelete));
+        }
+        panelButton.add(btnBack);
+        frame.add(panelButton);
+        frame.add(Box.createVerticalGlue());
+        frame.pack();
         panelButton.setVisible(true);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setVisible(true);
         
-        panelButton.add(label);
-        mainPanel.add(panelButton);
-        sPanel = new JScrollPane(mainPanel);
-        sPanel.setSize(400, 600);
-        frame.add(sPanel);
+        
         
     }
     
