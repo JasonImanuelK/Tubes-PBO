@@ -47,8 +47,7 @@ public class MethodLogin {
                         person = new User(rs.getString("nama"), rs.getString("noTelp"), rs.getString("password"), rs.getString("email"), StatusPerson.USER, member);
                     }
                    
-                    UserSingeltonManager instance = UserSingeltonManager.getInstance();
-                    instance.setPerson(person);
+                    UserSingeltonManager.getInstance().setPerson(person);
                     return true;
                 }
             }

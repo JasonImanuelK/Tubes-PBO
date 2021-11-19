@@ -32,6 +32,21 @@ public class MethodWilayah {
         return listDaerah;
     }
     
+    public ArrayList<String> getStringDaerah(){
+        String query = "SELECT * FROM daerah";
+        ArrayList<String> listDaerah= new ArrayList<>(); 
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                listDaerah.add(rs.getString("kota") + ", " + rs.getString("provinsi"));
+            };
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listDaerah;
+    }
+    
     public int getIdDaerahTerakhir() {
         String query = "SELECT idDaerah FROM daerah ORDER BY idDaerah DESC LIMIT 2";
         int jumlah = 0;

@@ -38,8 +38,7 @@ public class MethodRegistrasi {
             //statusPerson dan member otomatis terisi 'USER' dan 'BRONZE'
             stmt.executeUpdate();
             
-            UserSingeltonManager instance = UserSingeltonManager.getInstance();
-            instance.setPerson(person);
+            UserSingeltonManager.getInstance().setPerson(person);
             
             return true;
         } catch (SQLException e) {
