@@ -80,6 +80,8 @@ public class Login {
                         //Hans inigw masukin menu admin buat coba doang , kl nanti ceknya dr checkUser aja returnnya ganti ke int jangan boolean ty.
                         if(UserSingeltonManager.getInstance().getPerson() instanceof Admin){
                             new MenuAdmin();
+                        }else{
+                            new MainMenu();
                         }
                         
                     }else{

@@ -91,7 +91,7 @@ public class Registrasi {
                     if (methodRegistrasi.inputDataUser(person)) {
                         frame.dispose();
                         JOptionPane.showMessageDialog(null, "Akun Anda Sudah Terdaftar!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);
-//                        new MainMenu();
+                        new MainMenu();
                     }else{
                         JOptionPane.showMessageDialog(null, "Gagal Registrasi!", "Registrasi", JOptionPane.INFORMATION_MESSAGE);  
                     }

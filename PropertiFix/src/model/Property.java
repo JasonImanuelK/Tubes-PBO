@@ -5,42 +5,53 @@
  */
 package model;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Aloysius
  */
 public class Property {
     private int kodeProperty;
+    private Daerah daerah;
     private String alamat;
     private String deskripsiBangunan;
     private StatusJualSewa statusJualSewa;
-    private int harga;
+    private BigInteger harga;
     private int tipeProperty;
     private int luasBangunan;
-    private boolean verifikasi;
-    private int jumlahKamar;
     private int luasTanah;
-    
-    public Property(int kodeProperty, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, int harga, int tipeProperty, int luasBangunan, boolean verifikasi, int jumlahKamar, int luasTanah) {
+    private int jumlahKamar;
+    private boolean verifikasi;
+
+    public Property(int kodeProperty, Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, int tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
         this.kodeProperty = kodeProperty;
+        this.daerah = daerah;
         this.alamat = alamat;
         this.deskripsiBangunan = deskripsiBangunan;
         this.statusJualSewa = statusJualSewa;
         this.harga = harga;
         this.tipeProperty = tipeProperty;
         this.luasBangunan = luasBangunan;
-        this.verifikasi = verifikasi;
+        this.luasTanah = luasTanah;
         this.jumlahKamar = jumlahKamar;
-        this.luasTanah = luasTanah;
+        this.verifikasi = verifikasi;
     }
 
-    public int getLuasTanah() {
-        return luasTanah;
-    }
-
-    public void setLuasTanah(int luasTanah) {
+    public Property(Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, int tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
+        this.daerah = daerah;
+        this.alamat = alamat;
+        this.deskripsiBangunan = deskripsiBangunan;
+        this.statusJualSewa = statusJualSewa;
+        this.harga = harga;
+        this.tipeProperty = tipeProperty;
+        this.luasBangunan = luasBangunan;
         this.luasTanah = luasTanah;
+        this.jumlahKamar = jumlahKamar;
+        this.verifikasi = verifikasi;
     }
+    
+    
 
     public int getKodeProperty() {
         return kodeProperty;
@@ -48,6 +59,14 @@ public class Property {
 
     public void setKodeProperty(int kodeProperty) {
         this.kodeProperty = kodeProperty;
+    }
+
+    public Daerah getDaerah() {
+        return daerah;
+    }
+
+    public void setDaerah(Daerah daerah) {
+        this.daerah = daerah;
     }
 
     public String getAlamat() {
@@ -74,11 +93,11 @@ public class Property {
         this.statusJualSewa = statusJualSewa;
     }
 
-    public int getHarga() {
+    public BigInteger getHarga() {
         return harga;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(BigInteger harga) {
         this.harga = harga;
     }
 
@@ -98,12 +117,12 @@ public class Property {
         this.luasBangunan = luasBangunan;
     }
 
-    public boolean isVerifikasi() {
-        return verifikasi;
+    public int getLuasTanah() {
+        return luasTanah;
     }
 
-    public void setVerifikasi(boolean verifikasi) {
-        this.verifikasi = verifikasi;
+    public void setLuasTanah(int luasTanah) {
+        this.luasTanah = luasTanah;
     }
 
     public int getJumlahKamar() {
@@ -112,6 +131,14 @@ public class Property {
 
     public void setJumlahKamar(int jumlahKamar) {
         this.jumlahKamar = jumlahKamar;
+    }
+
+    public boolean isVerifikasi() {
+        return verifikasi;
+    }
+
+    public void setVerifikasi(boolean verifikasi) {
+        this.verifikasi = verifikasi;
     }
     
     public String printDataProperty(){
