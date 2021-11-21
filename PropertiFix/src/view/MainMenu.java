@@ -76,15 +76,16 @@ public class MainMenu {
             }
         });
         
-//        JButton btnProperty = new JButton("Lihat Property");
-//        btnProperty.setBounds(90, 120, 120, 40);
-//        btnProperty.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                
-//            }
-//        });
-//        
+        JButton btnLihatProperty = new JButton("lihat Property");
+        btnLihatProperty.setBounds(90, 120, 120, 40);
+        btnLihatProperty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.setVisible(false);
+                lihatPropertyMilikUser();
+            }
+        });
+        
 //        JButton btnUser = new JButton("Lihat User");
 //        btnUser.setBounds(220, 120, 120, 40);
 //        btnUser.addActionListener(new ActionListener() {
@@ -103,15 +104,16 @@ public class MainMenu {
 //            }
 //        });
 //        
-//        JButton btnLogOut = new JButton("Log-Out");
-//        btnLogOut.setBounds(320, 315, 100, 30);
-//        btnLogOut.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                frame.dispose();
-//                new Login();
-//            }
-//        });
+        JButton btnLogOut = new JButton("Log-Out");
+        btnLogOut.setBounds(320, 315, 100, 30);
+        btnLogOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.dispose();
+                UserSingeltonManager.getInstance().setPerson(null);
+                new Login();
+            }
+        });
         
         panel.setLayout(null);
         panel.setVisible(true);
@@ -122,11 +124,11 @@ public class MainMenu {
         frameMenu.add(panel);
         panel.add(labelJudul);
         panel.add(btnInputProperti);
-//        panel.add(btnDaerah);
+        panel.add(btnLihatProperty);
 //        panel.add(btnInputDaerah);
 //        panel.add(btnProperty);
 //        panel.add(btnUser);
-//        panel.add(btnLogOut);
+        panel.add(btnLogOut);
     }
     
     
@@ -147,6 +149,11 @@ public class MainMenu {
         frameFormProperty.setSize(380, 640);
         frameFormProperty.setLayout(null);
         windowClosingListener(frameFormProperty);
+        
+        frameLihatProperty = new JFrame("Lihat Property");
+        frameLihatProperty.setSize(380, 640);
+        frameLihatProperty.setLayout(null);
+        windowClosingListener(frameLihatProperty);
         
     }
     
@@ -237,7 +244,7 @@ public class MainMenu {
         
         //Button
         JButton btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(50, 560, 100, 30);
+        btnSubmit.setBounds(30, 560, 100, 30);
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -270,9 +277,57 @@ public class MainMenu {
             }
         });
         
+        JButton btnUpdate = new JButton("Update");
+        btnUpdate.setBounds(130, 560, 100, 30);
+        btnUpdate.setVisible(false);
+        
+        JButton btnBack = new JButton("Back");
+        btnBack.setBounds(250, 560, 100, 30);
         
         if(property != null){
             //untuk update property
+            for (int i = 0; i < arrayDaerah.length; i++) {
+                if(controllerProperty.getIdDaerah(property.getDaerah()) - 1 == i){
+                    comboDaerah.setSelectedIndex(i);
+                }
+            }
+            
+            textAlamat.setText(property.getAlamat());
+            textDeskripsi.setText(property.getDeskripsiBangunan());
+            if(property.getStatusJualSewa() == StatusJualSewa.JUAL){
+                comboStatusJualSewa.setSelectedIndex(0);
+            }else{
+                comboStatusJualSewa.setSelectedIndex(1);
+            }
+            
+            Long harga = property.getHarga().longValue();
+            spinnerHarga.setValue(harga);
+            if(property.getTipeProperty() == 1){
+                radioRumah.setSelected(true);
+            }else{
+                radioApartemen.setSelected(true);
+            }
+            
+            spinnerLuasBangunan.setValue(property.getLuasBangunan());
+            spinnerLuasTanah.setValue(property.getLuasTanah());
+            spinnerJumlahKamar.setValue(property.getJumlahKamar());
+            
+            btnUpdate.setVisible(true);
+            btnBack.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //lihat property
+                }
+            });
+            
+        }else{
+            btnBack.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frameFormProperty.dispose();
+                    frameMenu.setVisible(true);
+                }
+            });
         }
         
         
@@ -284,7 +339,6 @@ public class MainMenu {
         panel.add(textDeskripsi);
         panel.add(labelStatusJualSewa);
         panel.add(comboStatusJualSewa);
-        panel.add(btnSubmit);
         panel.add(labelHarga);
         panel.add(spinnerHarga);
         panel.add(labelTipeProperty);
@@ -298,8 +352,28 @@ public class MainMenu {
         panel.add(besaranLuasTanah);
         panel.add(labelJumlahKamar);
         panel.add(spinnerJumlahKamar);
+        panel.add(btnSubmit);
+        panel.add(btnUpdate);
+        panel.add(btnBack);
         
         frameFormProperty.add(panel);
+    }
+    
+    public void lihatPropertyMilikUser(){
+        frameMenu.setVisible(false);
+        frameLihatProperty.setVisible(true);
+        int x = 10;
+        ArrayList<Property> listProperty = controllerProperty.getListPropertyUser();
+        for (int i = 0; i < listProperty.size(); i++) {
+            //print hanya untuk test
+            System.out.println(listProperty.get(i).toString());
+            JLabel labelDaerah = new JLabel("Daerah");
+            labelDaerah.setBounds(10, x, 100, 40);
+            frameLihatProperty.add(labelDaerah);
+            
+            x += 20;
+        }
+        //kurang tombol ubah
     }
     
 }

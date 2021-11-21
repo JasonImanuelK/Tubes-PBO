@@ -12,7 +12,6 @@ import java.math.BigInteger;
  * @author Aloysius
  */
 public class Property {
-    private int kodeProperty;
     private Daerah daerah;
     private String alamat;
     private String deskripsiBangunan;
@@ -23,20 +22,6 @@ public class Property {
     private int luasTanah;
     private int jumlahKamar;
     private boolean verifikasi;
-
-    public Property(int kodeProperty, Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, int tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
-        this.kodeProperty = kodeProperty;
-        this.daerah = daerah;
-        this.alamat = alamat;
-        this.deskripsiBangunan = deskripsiBangunan;
-        this.statusJualSewa = statusJualSewa;
-        this.harga = harga;
-        this.tipeProperty = tipeProperty;
-        this.luasBangunan = luasBangunan;
-        this.luasTanah = luasTanah;
-        this.jumlahKamar = jumlahKamar;
-        this.verifikasi = verifikasi;
-    }
 
     public Property(Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, int tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
         this.daerah = daerah;
@@ -51,16 +36,6 @@ public class Property {
         this.verifikasi = verifikasi;
     }
     
-    
-
-    public int getKodeProperty() {
-        return kodeProperty;
-    }
-
-    public void setKodeProperty(int kodeProperty) {
-        this.kodeProperty = kodeProperty;
-    }
-
     public Daerah getDaerah() {
         return daerah;
     }
@@ -141,8 +116,9 @@ public class Property {
         this.verifikasi = verifikasi;
     }
     
-    public String printDataProperty(){
-        return "Kode Property\t\t: " + kodeProperty +
+    @Override
+    public String toString(){
+        return "Daerah\t\t\t: " + daerah.getKota() + ", " + daerah.getProvinsi() +
                 "\nAlamat\t\t\t: " + alamat +
                 "\nDeskripsi Bangunan\t: " + deskripsiBangunan + 
                 "\nStatus\t\t\t: " + statusJualSewa +

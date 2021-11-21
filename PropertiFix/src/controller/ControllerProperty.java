@@ -6,12 +6,15 @@
 package controller;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import model.Daerah;
 import model.Property;
+import model.StatusJualSewa;
 import model.User;
 import model.UserSingeltonManager;
 
@@ -28,7 +31,7 @@ public class ControllerProperty {
     
     public boolean inputProperty(Property property){
         conn.connect();
-        String query = "INSERT INTO `properti` (`idPengguna`, `idDaerah`, `alamat`, `deskripsiBangunan`, `statusJualSewa`, `harga`, `tipeProperty`, `luasBangunan`, `luahTanah`, `jumlahKamar`, `verifikasi`) "
+        String query = "INSERT INTO `properti` (`idPengguna`, `idDaerah`, `alamat`, `deskripsiBangunan`, `statusJualSewa`, `harga`, `tipeProperty`, `luasBangunan`, `luasTanah`, `jumlahKamar`, `verifikasi`) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
@@ -82,6 +85,51 @@ public class ControllerProperty {
             e.printStackTrace();
         }
         return id;
+    }
+    
+    public String getStringDaerah(int id){
+        conn.connect();
+        String daerah = "";
+        String query = "SELECT * FROM daerah WHERE idDaerah='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                daerah = rs.getString("kota") + ", " + rs.getString("provinsi");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return daerah;
+    }
+    
+    public ArrayList<Property> getListPropertyUser(){
+        ArrayList<Property> listProperty = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM properti WHERE idPengguna='" + getIdUser((User) UserSingeltonManager.getInstance().getPerson()) + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String[] splitDaerah = getStringDaerah(rs.getInt("idDaerah")).split(", ");
+                Daerah daerah = new Daerah(splitDaerah[1], splitDaerah[0]);
+                String alamat = rs.getString("alamat");
+                String deskripsi = rs.getString("deskripsiBangunan");
+                String statusJualSewa = rs.getString("statusJualSewa");
+                BigInteger harga = rs.getBigDecimal("harga").toBigInteger();
+                int tipeProperty = rs.getInt("tipeProperty");
+                int luasBangunan = rs.getInt("luasBangunan");
+                int luasTanah = rs.getInt("luasTanah");
+                int jumlahKamar = rs.getInt("jumlahKamar");
+                boolean verifikasi = rs.getBoolean("verifikasi");
+                listProperty.add(new Property(daerah, alamat, deskripsi, StatusJualSewa.valueOf(statusJualSewa), harga, tipeProperty, luasBangunan, luasTanah, jumlahKamar, verifikasi));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return listProperty;
     }
     
 }
