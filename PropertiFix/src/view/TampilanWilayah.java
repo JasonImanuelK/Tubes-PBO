@@ -38,7 +38,7 @@ public class TampilanWilayah {
         
         panelButton = new JPanel();
         panelButton.setSize(200, 200);
-        panelButton.setBackground(new Color(201, 248, 251));
+        panelButton.setBackground(new Color(201, 248, 201));
         
         btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
@@ -50,26 +50,33 @@ public class TampilanWilayah {
         });
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
         ArrayList <Wilayah> listWilayah = met.getSemuaWilayah();
-        for(int i = 0;i < listWilayah.size();i++){
-            JLabel labelProvinsi = new JLabel(listWilayah.get(i).getProvinsi());
-            JLabel labelKota = new JLabel(listWilayah.get(i).getKota());
-            JLabel labelDeskripsi = new JLabel(listWilayah.get(i).getDeskripsiWilayah());
-            JButton btnDelete = new JButton("Delete");
-            btnDelete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean hasil = met.deleteWilayah(labelKota.getText());
-                if(hasil){
-                    JOptionPane.showMessageDialog(null, "Wilayah sudah dihapus.", "Deleted", JOptionPane.INFORMATION_MESSAGE);                                          
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Wilayah gagal dihapus.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                btnDelete.setEnabled(false);
-            }
-            });
-            frame.add(new GroupPanel(i,labelProvinsi,labelKota,labelDeskripsi,btnDelete));
+        
+        if(listWilayah.size() == 0){
+            
         }
+        else{
+            for(int i = 0;i < listWilayah.size();i++){
+                JLabel labelProvinsi = new JLabel(listWilayah.get(i).getProvinsi());
+                JLabel labelKota = new JLabel(listWilayah.get(i).getKota());
+                JLabel labelDeskripsi = new JLabel(listWilayah.get(i).getDeskripsiWilayah());
+                JButton btnDelete = new JButton("Delete");
+                btnDelete.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean hasil = met.deleteWilayah(labelKota.getText());
+                    if(hasil){
+                        JOptionPane.showMessageDialog(null, "Wilayah sudah dihapus.", "Deleted", JOptionPane.INFORMATION_MESSAGE);    
+                        btnDelete.setEnabled(false);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Wilayah gagal dihapus.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                });
+                frame.add(new GroupPanel(i,labelProvinsi,labelKota,labelDeskripsi,btnDelete));
+            }
+        }
+        
         panelButton.add(btnBack);
         frame.add(panelButton);
         frame.add(Box.createVerticalGlue());

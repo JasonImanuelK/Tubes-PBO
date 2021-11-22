@@ -78,7 +78,8 @@ public class MenuAdmin {
         btnUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                frame.setVisible(false);
+                new TampilanUser(frame);
             }
         });
         
