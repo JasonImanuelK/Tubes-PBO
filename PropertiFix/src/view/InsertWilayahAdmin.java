@@ -74,11 +74,12 @@ public class InsertWilayahAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!txtProvinsi.getText().equals("") || !txtKota.getText().equals("")||!txtDeskripsi.getText().equals("")){
-                    frame.setVisible(false);
                     Wilayah newWilayah = new Wilayah(txtProvinsi.getText(),txtKota.getText(),txtDeskripsi.getText());
                     boolean hasil = met.insertWilayahBaru(newWilayah);
                     if(hasil){
-                        JOptionPane.showMessageDialog(null, "Data sudah diproses.", "Input Wilayah", JOptionPane.INFORMATION_MESSAGE);                                          
+                        frame.dispose();
+                        JOptionPane.showMessageDialog(null, "Data sudah diproses.", "Input Wilayah", JOptionPane.INFORMATION_MESSAGE);   
+                        frameMenu.setVisible(true);
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Data gagal dimasukan.", "Error", JOptionPane.ERROR_MESSAGE);

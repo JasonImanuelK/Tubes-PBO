@@ -15,13 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GroupPanel extends JPanel {
+public class GroupPanelUser extends JPanel {
 
-    private JLabel label1 = new JLabel("Kota :");
-    private JLabel label2 = new JLabel("Provinsi :");
-    private JLabel label3 = new JLabel("Deskripsi:");
+    private JLabel label1 = new JLabel("Nama :");
+    private JLabel label2 = new JLabel("Nomor Telepon :");
+    private JLabel label3 = new JLabel("E-mail :");
+    private JLabel label4 = new JLabel("Member :");
 
-    public GroupPanel(int n,JLabel labelProvinsi,JLabel labelKota,JLabel labelDeskripsi,JButton btnDelete) {
+    public GroupPanelUser(int n,JLabel labelNama,JLabel labelNoTelp,JLabel labelEmail,JLabel labelMember, JButton btnDelete,JButton btnUpgrade) {
         this.setBackground(new Color(201, 248, 201));
         this.setBorder(BorderFactory.createTitledBorder("Wilayah ke-" + (n+1)));
         GroupLayout layout = new GroupLayout(this);          
@@ -32,24 +33,31 @@ public class GroupPanel extends JPanel {
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                 .addComponent(label1)
                 .addComponent(label2)
-                .addComponent(label3))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(labelKota)
-                .addComponent(labelProvinsi)
-                .addComponent(labelDeskripsi)
+                .addComponent(label3)
+                .addComponent(label4)
                 .addComponent(btnDelete))
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(labelNama)
+                .addComponent(labelNoTelp)
+                .addComponent(labelEmail)
+                .addComponent(labelMember)
+                .addComponent(btnUpgrade))
         );
         layout.setVerticalGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(label1)
-                .addComponent(labelKota))
+                .addComponent(labelNama))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(label2)
-                .addComponent(labelProvinsi))
+                .addComponent(labelNoTelp))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(label3)
-                .addComponent(labelDeskripsi))
+                .addComponent(labelEmail))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(label4)
+                .addComponent(labelMember))
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(btnUpgrade)
                 .addComponent(btnDelete))
         );
     }
