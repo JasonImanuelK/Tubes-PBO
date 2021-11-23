@@ -7,38 +7,50 @@ package view;
 
 import javax.swing.JFrame;
 import controller.ControllerProperty;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import model.Property;
+import model.UserSingeltonManager;
+import model.User;
 
 /**
  *
  * @author Aloysius
  */
-public class LihatPropertyUser {
+public class VerifikasiProperty {
     JFrame frame;
     ControllerProperty controllerProperty = new ControllerProperty();
     
-    public LihatPropertyUser(){
-        frame = new JFrame("Lihat Property");
-        frame.setSize(380, 640);
+    public VerifikasiProperty(){
+        frame = new JFrame("Verifikasi Property");
+        frame.setSize(440, 640);
         frame.setLayout(null);
         frame.setVisible(true);
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                frame.dispose();
-                new MainMenu();
-            }
-        });
+        
+        if(UserSingeltonManager.getInstance().getPerson() instanceof User){
+            frame.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                    frame.dispose();
+                    new MainMenu();
+                }
+            });
+        }else{
+            frame.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                    frame.dispose();
+                    new MenuAdmin();
+                }
+            });
+        }
         
         int height = 10;
-        ArrayList<Property> listProperty = controllerProperty.getListPropertyUser();
+        ArrayList<Property> listProperty = controllerProperty.getListPropertyBelumTerverifikasi();
         for (int i = 0; i < listProperty.size(); i++) {
             Property property = (listProperty.get(i));
             JLabel labelDaerah = new JLabel("Daerah : " + property.getDaerah().getKota() + ", " + property.getDaerah().getProvinsi());
@@ -60,22 +72,33 @@ public class LihatPropertyUser {
             JLabel labelJumlahKamar = new JLabel("Jumlah Kamar : " + property.getJumlahKamar());
             labelJumlahKamar.setBounds(10, height+160, 300, 20);
             
-            String verifikasi;
-            if(property.isVerifikasi()){
-                verifikasi = "Sudah terverifikasi";
-            }else{
-                verifikasi = "Belum terverifikasi";
-            }
-            JLabel labelVerifikasi = new JLabel("Verifikasi : " + verifikasi);
-            labelVerifikasi.setBounds(10, height+180, 300, 20);
-            
-            JButton edit = new JButton("Edit");
-            edit.setBounds(250, height+85, 80, 40);
-            edit.addActionListener(new ActionListener() {
+            JButton delete = new JButton("Delete");
+            delete.setBounds(250, height+85, 80, 40);
+            delete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
-                    new FormProperty(property);
+                    if(controllerProperty.deleteProperty(property)){
+                        JOptionPane.showMessageDialog(null, "Delete berhasil");
+                        new VerifikasiProperty();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Delete gagal");
+                    }
+                }
+            });
+            
+            JButton verifikasi = new JButton("Verifikasi");
+            verifikasi.setBounds(350, height+85, 80, 40);
+            verifikasi.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    if(controllerProperty.verifikasiProperty(property)){
+                        JOptionPane.showMessageDialog(null, "Verifikasi berhasil");
+                        new VerifikasiProperty();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Verifikasi gagal");
+                    }
                 }
             });
             
@@ -88,8 +111,8 @@ public class LihatPropertyUser {
             frame.add(labelLuasBangunan);
             frame.add(labelLuasTanah);
             frame.add(labelJumlahKamar);
-            frame.add(labelVerifikasi);
-            frame.add(edit);
+            frame.add(verifikasi);
+            frame.add(delete);
             height += 220;
         }
     }

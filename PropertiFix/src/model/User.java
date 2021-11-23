@@ -13,6 +13,9 @@ public class User extends Person{
     
     private Member member;
     
+    public User(){
+    }
+    
     public User(String nama, String noTelp, String password, String email, StatusPerson status,Member member) {
         super(nama, noTelp, password, email, status);
         this.member = member;
