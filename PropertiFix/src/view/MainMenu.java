@@ -85,14 +85,15 @@ public class MainMenu {
 //            }
 //        });
 //        
-//        JButton btnUser = new JButton("Lihat User");
-//        btnUser.setBounds(220, 120, 120, 40);
-//        btnUser.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                
-//            }
-//        });
+        JButton buttonEditProfile = new JButton("Edit Profile");
+        buttonEditProfile.setBounds(220, 120, 120, 40);
+        buttonEditProfile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.dispose();
+                new EditProfile();
+            }
+        });
 //        
 //        JButton btnTransaksi = new JButton("Lihat Transaksi");
 //        btnTransaksi.setBounds(150, 180, 140, 40);
@@ -125,7 +126,7 @@ public class MainMenu {
 //        panel.add(btnDaerah);
 //        panel.add(btnInputDaerah);
 //        panel.add(btnProperty);
-//        panel.add(btnUser);
+        panel.add(buttonEditProfile);
 //        panel.add(btnLogOut);
     }
     
