@@ -12,6 +12,9 @@ package model;
 public class Daerah {
     private String provinsi;
     private String kota;
+    
+    public Daerah(){
+    }
 
     public Daerah(String provinsi, String kota) {
         this.provinsi = provinsi;

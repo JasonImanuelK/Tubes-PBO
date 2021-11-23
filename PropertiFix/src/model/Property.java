@@ -12,20 +12,20 @@ import java.math.BigInteger;
  * @author Aloysius
  */
 public class Property {
-    private int kodeProperty;
+    private int kodeProperti;
     private Daerah daerah;
     private String alamat;
     private String deskripsiBangunan;
     private StatusJualSewa statusJualSewa;
     private BigInteger harga;
-    private int tipeProperty;
+    private TipeProperty tipeProperty;
     private int luasBangunan;
     private int luasTanah;
     private int jumlahKamar;
     private boolean verifikasi;
 
-    public Property(int kodeProperty, Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, int tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
-        this.kodeProperty = kodeProperty;
+    public Property(int kodeProperti, Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, TipeProperty tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
+        this.kodeProperti = kodeProperti;
         this.daerah = daerah;
         this.alamat = alamat;
         this.deskripsiBangunan = deskripsiBangunan;
@@ -38,27 +38,12 @@ public class Property {
         this.verifikasi = verifikasi;
     }
 
-    public Property(Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, int tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
-        this.daerah = daerah;
-        this.alamat = alamat;
-        this.deskripsiBangunan = deskripsiBangunan;
-        this.statusJualSewa = statusJualSewa;
-        this.harga = harga;
-        this.tipeProperty = tipeProperty;
-        this.luasBangunan = luasBangunan;
-        this.luasTanah = luasTanah;
-        this.jumlahKamar = jumlahKamar;
-        this.verifikasi = verifikasi;
-    }
-    
-    
-
-    public int getKodeProperty() {
-        return kodeProperty;
+    public int getKodeProperti() {
+        return kodeProperti;
     }
 
-    public void setKodeProperty(int kodeProperty) {
-        this.kodeProperty = kodeProperty;
+    public void setKodeProperti(int kodeProperti) {
+        this.kodeProperti = kodeProperti;
     }
 
     public Daerah getDaerah() {
@@ -101,11 +86,11 @@ public class Property {
         this.harga = harga;
     }
 
-    public int getTipeProperty() {
+    public TipeProperty getTipeProperty() {
         return tipeProperty;
     }
 
-    public void setTipeProperty(int tipeProperty) {
+    public void setTipeProperty(TipeProperty tipeProperty) {
         this.tipeProperty = tipeProperty;
     }
 
@@ -142,15 +127,15 @@ public class Property {
     }
     
     public String printDataProperty(){
-        return "Kode Property\t\t: " + kodeProperty +
+        return "Kode Property\t\t: " + kodeProperti +
                 "\nAlamat\t\t\t: " + alamat +
                 "\nDeskripsi Bangunan\t: " + deskripsiBangunan + 
                 "\nStatus\t\t\t: " + statusJualSewa +
                 "\nHarga\t\t\t: " + harga +
                 "\nTipe property\t\t: " + tipeProperty + 
                 "\nLuas Bangunan\t\t: " + luasBangunan + 
-                //verifikasi ga di print kan ?? cuma buat admin doang ??
                 "\nJumlah Kamar\t\t: " + jumlahKamar + 
-                "\nLuas Tanah\t\t: " + luasTanah;
+                "\nLuas Tanah\t\t: " + luasTanah +
+                "\nVerifikasi\t\t: " + verifikasi;
     }
 }
