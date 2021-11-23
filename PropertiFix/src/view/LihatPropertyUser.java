@@ -23,6 +23,7 @@ public class LihatPropertyUser {
         frame = new JFrame("Lihat Property");
         frame.setSize(380, 640);
         frame.setLayout(null);
+        frame.setVisible(true);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
