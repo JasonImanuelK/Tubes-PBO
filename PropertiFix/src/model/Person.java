@@ -15,7 +15,9 @@ public abstract class Person {
     private String password;
     private String email;
     private StatusPerson status;
-
+    
+    public Person(){
+    }
     
     public Person(String nama, String noTelp, String password, String email, StatusPerson status) {
         this.nama = nama;

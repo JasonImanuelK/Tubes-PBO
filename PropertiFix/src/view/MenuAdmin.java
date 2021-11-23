@@ -69,7 +69,7 @@ public class MenuAdmin {
         btnProperty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                //
             }
         });
         
@@ -88,9 +88,19 @@ public class MenuAdmin {
         btnTransaksi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                //
             }
         });
+        
+        JButton btnVerifikasiProperty = new JButton("Verifikasi Property");
+        btnVerifikasiProperty.setBounds(150, 315, 100, 30);
+        btnVerifikasiProperty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VerifikasiProperty();
+            }
+        });
+        
         
         btnLogOut = new JButton("Log-Out");
         btnLogOut.setBounds(320, 315, 100, 30);

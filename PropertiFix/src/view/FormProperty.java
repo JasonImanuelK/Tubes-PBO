@@ -29,6 +29,8 @@ import javax.swing.SpinnerNumberModel;
 import model.Daerah;
 import model.StatusJualSewa;
 import model.TipeProperty;
+import model.User;
+import model.UserSingeltonManager;
 
 /**
  *
@@ -144,7 +146,8 @@ public class FormProperty {
                     }
                     
                     int kodeProperti = controllerProperty.getLastKodeProperti();
-                    Property property = new Property(kodeProperti, daerah, textAlamat.getText(), textDeskripsi.getText(), StatusJualSewa.valueOf(stringStatusJualSewa), hargaProperty, tipeProperty, (Integer) spinnerLuasBangunan.getValue(), (Integer) spinnerLuasTanah.getValue(), (Integer) spinnerJumlahKamar.getValue(), false);
+                    User user = (User) UserSingeltonManager.getInstance().getPerson();
+                    Property property = new Property(kodeProperti, user, daerah, textAlamat.getText(), textDeskripsi.getText(), StatusJualSewa.valueOf(stringStatusJualSewa), hargaProperty, tipeProperty, (Integer) spinnerLuasBangunan.getValue(), (Integer) spinnerLuasTanah.getValue(), (Integer) spinnerJumlahKamar.getValue(), false);
                     if(controllerProperty.inputProperty(property)){
                         JOptionPane.showMessageDialog(null, "Input berhasil");
                         frame.dispose();
@@ -167,11 +170,13 @@ public class FormProperty {
         btnBack.setBounds(250, 560, 100, 30);
         
         JButton btnDelete = new JButton("Delete");
-        btnDelete.setBounds(370, 560, 100, 30);
+        btnDelete.setBounds(30, 560, 100, 30);
         btnDelete.setVisible(false);
         
         if(property != null){
             //untuk update property
+            btnSubmit.setVisible(false);
+            
             for (int i = 0; i < arrayDaerah.length; i++) {
                 if(controllerProperty.getIdDaerah(property.getDaerah()) - 1 == i){
                     comboDaerah.setSelectedIndex(i);
@@ -285,8 +290,8 @@ public class FormProperty {
         panel.add(spinnerJumlahKamar);
         panel.add(btnSubmit);
         panel.add(btnUpdate);
+        panel.add(btnDelete);
         panel.add(btnBack);
-        
         frame.add(panel);
         
     }

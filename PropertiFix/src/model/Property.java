@@ -13,6 +13,7 @@ import java.math.BigInteger;
  */
 public class Property {
     private int kodeProperti;
+    private User user;
     private Daerah daerah;
     private String alamat;
     private String deskripsiBangunan;
@@ -23,9 +24,10 @@ public class Property {
     private int luasTanah;
     private int jumlahKamar;
     private boolean verifikasi;
-
-    public Property(int kodeProperti, Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, TipeProperty tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
+    
+    public Property(int kodeProperti, User user, Daerah daerah, String alamat, String deskripsiBangunan, StatusJualSewa statusJualSewa, BigInteger harga, TipeProperty tipeProperty, int luasBangunan, int luasTanah, int jumlahKamar, boolean verifikasi) {
         this.kodeProperti = kodeProperti;
+        this.user = user;
         this.daerah = daerah;
         this.alamat = alamat;
         this.deskripsiBangunan = deskripsiBangunan;
@@ -38,6 +40,14 @@ public class Property {
         this.verifikasi = verifikasi;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     public int getKodeProperti() {
         return kodeProperti;
     }

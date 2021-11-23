@@ -107,24 +107,26 @@ public class MainMenu {
             }
         });
 //        
-//        JButton btnTransaksi = new JButton("Lihat Transaksi");
-//        btnTransaksi.setBounds(150, 180, 140, 40);
-//        btnTransaksi.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                
-//            }
-//        });
+        JButton btnLihatProperty = new JButton("Lihat Semua Property");
+        btnLihatProperty.setBounds(150, 180, 140, 40);
+        btnLihatProperty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.dispose();
+                //masuk ke filter
+            }
+        });
 //        
-//        JButton btnLogOut = new JButton("Log-Out");
-//        btnLogOut.setBounds(320, 315, 100, 30);
-//        btnLogOut.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                frame.dispose();
-//                new Login();
-//            }
-//        });
+        JButton btnLogOut = new JButton("Log-Out");
+        btnLogOut.setBounds(320, 315, 100, 30);
+        btnLogOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.dispose();
+                UserSingeltonManager.getInstance().setPerson(null);
+                new Login();
+            }
+        });
         
         panel.setLayout(null);
         panel.setVisible(true);
@@ -136,10 +138,10 @@ public class MainMenu {
         panel.add(labelJudul);
         panel.add(btnInputProperti);
 //        panel.add(btnDaerah);
-//        panel.add(btnInputDaerah);
+        panel.add(btnLihatProperty);
         panel.add(btnLihatPropertyUser);
         panel.add(buttonEditProfile);
-//        panel.add(btnLogOut);
+        panel.add(btnLogOut);
     }
     
 }
