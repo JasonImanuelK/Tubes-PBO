@@ -106,7 +106,7 @@ public class FormProperty {
         
         JLabel labelLuasBangunan = new JLabel("Luas Bangunan");
         labelLuasBangunan.setBounds(10, 410, 160, 40);
-        JSpinner spinnerLuasBangunan = new JSpinner(new SpinnerNumberModel(0,0,99999999,1));
+        JSpinner spinnerLuasBangunan = new JSpinner(new SpinnerNumberModel(0,0,99999,1));
         spinnerLuasBangunan.setBounds(135, 413, 150, 30);
         JLabel besaranLuasBangunan = new JLabel("Meter persegi");
         besaranLuasBangunan.setBounds(295, 410, 160, 40);
@@ -114,7 +114,7 @@ public class FormProperty {
         
         JLabel labelLuasTanah = new JLabel("Luas Tanah");
         labelLuasTanah.setBounds(10, 460, 160, 40);
-        JSpinner spinnerLuasTanah = new JSpinner(new SpinnerNumberModel(0,0,99999999,1));
+        JSpinner spinnerLuasTanah = new JSpinner(new SpinnerNumberModel(0,0,99999,1));
         spinnerLuasTanah.setBounds(135, 463, 150, 30);
         JLabel besaranLuasTanah = new JLabel("Meter persegi");
         besaranLuasTanah.setBounds(295, 460, 160, 40);
@@ -122,7 +122,7 @@ public class FormProperty {
         
         JLabel labelJumlahKamar = new JLabel("Jumlah kamar");
         labelJumlahKamar.setBounds(10, 510, 160, 40);
-        JSpinner spinnerJumlahKamar = new JSpinner(new SpinnerNumberModel(0,0,9999,1));
+        JSpinner spinnerJumlahKamar = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
         spinnerJumlahKamar.setBounds(135, 513, 150, 30);
         
         //Button

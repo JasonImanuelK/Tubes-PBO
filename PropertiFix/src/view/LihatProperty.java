@@ -8,6 +8,7 @@ package view;
 import controller.ControllerProperty;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -111,12 +112,14 @@ public class LihatProperty {
             height += 220;
         }
         
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setPreferredSize(new Dimension(panel.getComponent(0).getPreferredSize()));
-        scrollPane.setVisible(true);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        frame.add(scrollPane);
+        
+        //ScrollPane
+//        JScrollPane scrollPane = new JScrollPane(panel);
+//        scrollPane.setPreferredSize(new Dimension(panel.getComponent(0).getPreferredSize()));
+//        scrollPane.setVisible(true);
+//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+//        frame.add(scrollPane);
         
         JButton back = new JButton("Back");
         back.setBounds(0, 0, 80, 20);
@@ -139,6 +142,7 @@ public class LihatProperty {
         }
         
         frame.add(back);
-//        frame.add(panel);
+        //not ScrollPane
+        frame.add(panel);
     }
 }
