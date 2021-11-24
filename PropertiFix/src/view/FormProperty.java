@@ -231,7 +231,6 @@ public class FormProperty implements InterfacePesan{
                     
                     if(controllerProperty.updateProperty(property)){
                         JOptionPane.showMessageDialog(null, updateBerhasil);
-                        new LihatPropertyUser();
                     }else{
                         JOptionPane.showMessageDialog(null, updateGagal);
                     }
