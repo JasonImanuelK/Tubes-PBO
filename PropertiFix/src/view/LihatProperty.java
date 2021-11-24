@@ -36,7 +36,6 @@ public class LihatProperty implements InterfacePesan{
     public LihatProperty(ArrayList<Property> listProperty){ //sebelum kesini query dulu pake getListPropertyUseFilter()
         frame = new JFrame("Lihat Property");
         frame.setSize(480, 640);
-        frame.setLayout(null);
         frame.setVisible(true);
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -141,7 +140,7 @@ public class LihatProperty implements InterfacePesan{
                 }
             });
         }
-        
+
         frame.add(back);
         //not ScrollPane
         frame.add(panel);
