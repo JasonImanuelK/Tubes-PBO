@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import model.Daerah;
+import model.InterfacePesan;
 import model.StatusJualSewa;
 import model.TipeProperty;
 import model.User;
@@ -36,7 +37,7 @@ import model.UserSingeltonManager;
  *
  * @author Aloysius
  */
-public class FormProperty {
+public class FormProperty implements InterfacePesan{
     JFrame frame;
     MethodWilayah controllerWilayah = new MethodWilayah();
     ControllerProperty controllerProperty = new ControllerProperty();
@@ -229,10 +230,10 @@ public class FormProperty {
                     property.setJumlahKamar((Integer) spinnerJumlahKamar.getValue());
                     
                     if(controllerProperty.updateProperty(property)){
-                        JOptionPane.showMessageDialog(null, "Update berhasil");
+                        JOptionPane.showMessageDialog(null, updateBerhasil);
                         new LihatPropertyUser();
                     }else{
-                        JOptionPane.showMessageDialog(null, "Update gagal");
+                        JOptionPane.showMessageDialog(null, updateGagal);
                     }
                 }
             });
@@ -243,10 +244,10 @@ public class FormProperty {
                 public void actionPerformed(ActionEvent e) {
                     if(controllerProperty.deleteProperty(property)){
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Delete berhasil");
+                        JOptionPane.showMessageDialog(null, hapusBerhasil);
                         new LihatPropertyUser();
                     }else{
-                        JOptionPane.showMessageDialog(null, "Delete gagal");
+                        JOptionPane.showMessageDialog(null, hapusGagal);
                     }
                 }
             });

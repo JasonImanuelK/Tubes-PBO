@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.InterfacePesan;
 import model.Member;
 import model.Person;
 import model.StatusPerson;
@@ -28,7 +29,7 @@ import model.UserSingeltonManager;
  *
  * @author User
  */
-public class EditProfile {
+public class EditProfile implements InterfacePesan{
     JFrame frame;
     JPanel panel;
     JLabel labelJudul, labelNama, labelEmail, labelPassword, labelNomorTelepon;
@@ -91,10 +92,10 @@ public class EditProfile {
                     Person person = new User(textFieldNama.getText(), textFieldNomorTelepon.getText(), String.valueOf(passFieldPassword.getPassword()), textFieldEmail.getText(), StatusPerson.USER, Member.BRONZE);                                                                                                   
                     if (methodEditProfile.updateDataUser(person)) {
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Akun Anda Sudah Diedit!", "Edit Profile", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, updateBerhasil, "Edit Profile", JOptionPane.INFORMATION_MESSAGE);
                         new MainMenu();
                     }else{
-                        JOptionPane.showMessageDialog(null, "Gagal Edit!", "Edit Profile", JOptionPane.INFORMATION_MESSAGE);  
+                        JOptionPane.showMessageDialog(null, updateGagal, "Edit Profile", JOptionPane.INFORMATION_MESSAGE);  
                     }
                 }
             }
