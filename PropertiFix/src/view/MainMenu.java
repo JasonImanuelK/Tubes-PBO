@@ -82,8 +82,12 @@ public class MainMenu {
         btnInputProperti.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frameMenu.dispose();
-                new FormProperty(null);
+                if(controllerProperty.cekJumlahPropertyUser()){
+                    frameMenu.dispose();
+                    new FormProperty(null);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Anda tidak dapat menambah property lagi, silahkan upgrade Member");
+                }
             }
         });
         

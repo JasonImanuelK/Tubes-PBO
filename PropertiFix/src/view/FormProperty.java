@@ -242,6 +242,7 @@ public class FormProperty {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(controllerProperty.deleteProperty(property)){
+                        frame.dispose();
                         JOptionPane.showMessageDialog(null, "Delete berhasil");
                         new LihatPropertyUser();
                     }else{
