@@ -12,7 +12,7 @@ package model;
 public class Wilayah extends Daerah{
     private String deskripsiWilayah;
 
-    public Wilayah(String deskripsiWilayah, String provinsi, String kota) {
+    public Wilayah(String provinsi, String kota, String deskripsiWilayah) {
         super(provinsi, kota);
         this.deskripsiWilayah = deskripsiWilayah;
     }
