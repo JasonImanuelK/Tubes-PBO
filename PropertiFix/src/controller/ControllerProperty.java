@@ -224,16 +224,16 @@ public class ControllerProperty {
         }
     }
 
-    public ArrayList<Property> getListPropertyUseFilter(int idDaerah, BigInteger hargaMax, BigInteger hargaMin, String stringTipeProperty, int luasBangunanMax, int luasBangunanMin, int luasTanahMax, int luasTanahMin, int jumlahKamarMax, int jumlahKamarMin) {
+    public ArrayList<Property> getListPropertyUseFilter(int idDaerah, BigInteger hargaMin, BigInteger hargaMax, String stringTipeProperty, int luasBangunanMin, int luasBangunanMax, int luasTanahMin, int luasTanahMax, int jumlahKamarMin, int jumlahKamarMax) {
         ArrayList<Property> listProperty = new ArrayList<>();
         conn.connect();
         String query = "SELECT * FROM properti WHERE idDaerah='" + idDaerah + "' "
                 + "AND harga BETWEEN " + new BigDecimal(hargaMin) + " AND " + new BigDecimal(hargaMax)
                 + " AND tipeProperty='" + stringTipeProperty + "' "
                 + "AND luasBangunan BETWEEN " + luasBangunanMin + " AND " + luasBangunanMax
-                + "AND luasTanah BETWEEN " + luasTanahMin + " AND " + luasTanahMax
-                + "AND luasBangunan BETWEEN " + jumlahKamarMin + " AND " + jumlahKamarMax
-                + "AND verifikasi=" + 1 + " ";
+                + " AND luasTanah BETWEEN " + luasTanahMin + " AND " + luasTanahMax
+                + " AND luasBangunan BETWEEN " + jumlahKamarMin + " AND " + jumlahKamarMax
+                + " AND verifikasi=" + 1 + " ";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);

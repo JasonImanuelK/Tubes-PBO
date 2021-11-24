@@ -32,7 +32,6 @@ public class TampilanWilayah {
     public TampilanWilayah(JFrame frameMenu){
         //Frame
         frame = new JFrame("Deskripsi Wilayah");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         panelButton = new JPanel();
         panelButton.setSize(200, 200);
