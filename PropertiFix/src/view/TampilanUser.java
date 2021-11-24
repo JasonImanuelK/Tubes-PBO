@@ -17,6 +17,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import model.InterfacePesan;
 import model.Member;
 import model.User;
 
@@ -24,7 +25,7 @@ import model.User;
  *
  * @author jason
  */
-public class TampilanUser {
+public class TampilanUser implements InterfacePesan{
     JFrame frame;
     JPanel panelButton;
     JButton btnBack;
@@ -65,12 +66,12 @@ public class TampilanUser {
                 public void actionPerformed(ActionEvent e) {
                     Boolean hasil = met.deleteUser(labelNama.getText(),labelEmail.getText());
                     if(hasil){
-                        JOptionPane.showMessageDialog(null, "User sudah dihapus.", "Deleted", JOptionPane.INFORMATION_MESSAGE); 
+                        JOptionPane.showMessageDialog(null, hapusBerhasil, "Deleted", JOptionPane.INFORMATION_MESSAGE); 
                         btnDelete.setEnabled(false);
                         btnUpgrade.setEnabled(false);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "User gagal dihapus.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, hapusGagal, "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }});
 
@@ -95,10 +96,10 @@ public class TampilanUser {
                         JOptionPane.showMessageDialog(null, "Member User sudah yang tertinggi.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     else if(hasil){
-                        JOptionPane.showMessageDialog(null, "User sudah diupgrade.", "Upgraded", JOptionPane.INFORMATION_MESSAGE); 
+                        JOptionPane.showMessageDialog(null, updateBerhasil, "Upgraded", JOptionPane.INFORMATION_MESSAGE); 
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "User gaga; diUpdate.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, updateGagal, "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }});
                 

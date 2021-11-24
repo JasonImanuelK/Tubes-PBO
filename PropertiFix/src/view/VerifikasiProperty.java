@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import model.InterfacePesan;
 import model.Property;
 import model.UserSingeltonManager;
 import model.User;
@@ -21,7 +22,7 @@ import model.User;
  *
  * @author Aloysius
  */
-public class VerifikasiProperty {
+public class VerifikasiProperty implements InterfacePesan{
     JFrame frame;
     ControllerProperty controllerProperty = new ControllerProperty();
     
@@ -62,10 +63,10 @@ public class VerifikasiProperty {
                 public void actionPerformed(ActionEvent e) {
                     frame.dispose();
                     if(controllerProperty.deleteProperty(property)){
-                        JOptionPane.showMessageDialog(null, "Delete berhasil");
+                        JOptionPane.showMessageDialog(null, hapusBerhasil);
                         new VerifikasiProperty();
                     }else{
-                        JOptionPane.showMessageDialog(null, "Delete gagal");
+                        JOptionPane.showMessageDialog(null, hapusGagal);
                     }
                 }
             });

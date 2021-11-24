@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import model.Admin;
+import model.InterfacePesan;
 import model.Property;
 import model.User;
 import model.UserSingeltonManager;
@@ -28,7 +29,7 @@ import model.UserSingeltonManager;
  *
  * @author Aloysius
  */
-public class LihatProperty {
+public class LihatProperty implements InterfacePesan{
     JFrame frame;
     ControllerProperty controllerProperty = new ControllerProperty();
     
@@ -87,10 +88,10 @@ public class LihatProperty {
                     public void actionPerformed(ActionEvent e) {
                         frame.dispose();
                         if(controllerProperty.deleteProperty(property)){
-                            JOptionPane.showMessageDialog(null, "Delete berhasil");
+                            JOptionPane.showMessageDialog(null, hapusBerhasil);
                             new MenuAdmin();
                         }else{
-                            JOptionPane.showMessageDialog(null, "Delete gagal");
+                            JOptionPane.showMessageDialog(null, hapusGagal);
                         }
                     }
                 });

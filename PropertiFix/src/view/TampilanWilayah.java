@@ -17,13 +17,14 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import model.InterfacePesan;
 import model.Wilayah;
 
 /**
  *
  * @author jason
  */
-public class TampilanWilayah {
+public class TampilanWilayah implements InterfacePesan{
     JFrame frame;
     JPanel panelButton;
     JButton btnBack;
@@ -62,11 +63,11 @@ public class TampilanWilayah {
                 public void actionPerformed(ActionEvent e) {
                     boolean hasil = met.deleteWilayah(labelKota.getText());
                     if(hasil){
-                        JOptionPane.showMessageDialog(null, "Wilayah sudah dihapus.", "Deleted", JOptionPane.INFORMATION_MESSAGE);    
+                        JOptionPane.showMessageDialog(null, hapusBerhasil, "Deleted", JOptionPane.INFORMATION_MESSAGE);    
                         btnDelete.setEnabled(false);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Wilayah gagal dihapus.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, hapusGagal, "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 });
