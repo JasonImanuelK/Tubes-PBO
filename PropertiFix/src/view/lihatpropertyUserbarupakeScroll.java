@@ -6,8 +6,16 @@
 package view;
 
 import controller.ControllerProperty;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import model.Property;
 /**
@@ -16,12 +24,17 @@ import model.Property;
  */
 public class lihatpropertyUserbarupakeScroll {
     JFrame frame;
+    JPanel panel,panelTable,panelButton;
+    JTable tableData;
+    JScrollPane tableDataScroll;
     ControllerProperty controllerProperty = new ControllerProperty();
+    JButton buttonBack;
     
     public lihatpropertyUserbarupakeScroll(ArrayList<Property> listProperty){
         ControllerProperty control = new ControllerProperty();
 //        ArrayList<Property> listProperty = control.getListPropertyUser();
-        String[] column = {"Provinsi","Kota","Alamat","Deskripsi Bangunan","Status","Harga","Tipe Property","Luas Bangunan","Luas Tanah","Jumlah Kamar"};
+        String[] column = {"KodeProperty","Alamat","Deskripsi Bangunan","Status","Harga","Tipe Property","Luas Bangunan","Luas Tanah","Jumlah Kamar"};
+        String[][] data = control.getListAllProperty();
         
         frame = new JFrame("Lihat Property");
         frame.setSize(380, 640);
@@ -35,5 +48,37 @@ public class lihatpropertyUserbarupakeScroll {
             }
         });
         
+        //panel
+        panel = new JPanel(new BorderLayout());
+        
+        //table
+        tableData = new JTable(data,column);
+        tableData.setSize(400,200);
+        tableData.setDefaultEditor(Object.class, null);
+        
+        //scroll pane
+        tableDataScroll = new JScrollPane(tableData);
+        tableDataScroll.setBounds(50,300,10,30);
+        
+        //button
+        buttonBack = new JButton("Back");
+        
+        panelTable = new JPanel();
+        panelTable.add(tableDataScroll,BorderLayout.CENTER);
+        panelButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelButton.add(buttonBack);
+        
+        frame.setLocationRelativeTo(null);
+        frame.add(panel);
+        frame.setVisible(true);
+        
+        buttonBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                MainMenu main = new MainMenu();
+                main.frameMenu.setVisible(true);
+            }
+        });
     }
 }

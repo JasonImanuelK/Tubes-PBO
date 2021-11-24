@@ -189,6 +189,7 @@ public class FilterProperty {
 
                     frameFilter.dispose();
                     new LihatProperty(listProperty);
+//                    new lihatpropertyUserbarupakeScroll(listProperty);
                 }else{
                     JOptionPane.showMessageDialog(null, "Pilih tipe property");
                 }

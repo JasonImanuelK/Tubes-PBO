@@ -292,28 +292,49 @@ public class ControllerProperty {
         return listProperty;
     }
     
-//    public String[][] getListAllProperty() {
-//        ArrayList<Property> listProperty = new ArrayList<Property>();
-//        listProperty = getAllProperty();
-//        conn.connect();
-//        User user = (User) UserSingeltonManager.getInstance().getPerson();
-//        String query = "SELECT * FROM properti WHERE NOT idPengguna='" + getIdUser(user) + "'";
-//        try {
-//            String data[][] = new String[listProperty.size()][10];
-//            
-//            Statement stmt = conn.con.createStatement();
-//            ResultSet rs = stmt.executeQuery(query);
-//            
-//            int row = 0;
-//            while (rs.next()) {
-//                String provinsi = getDaerah()
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
+    public String[][] getListAllProperty() {
+        ArrayList<Property> listProperty = new ArrayList<Property>();
+        listProperty = getAllProperty();
+        conn.connect();
+        User user = (User) UserSingeltonManager.getInstance().getPerson();
+        String query = "SELECT * FROM properti WHERE NOT idPengguna='" + getIdUser(user) + "'";
+        String data[][] = new String[listProperty.size()][9];
+        try {
+//            String data[][] = new String[listProperty.size()][9];
+            
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            int row = 0;
+            while (rs.next()) {
+                String id = String.valueOf(rs.getInt("kodeProperti"));
+                String alamat = rs.getString("alamat");
+                String deskripsi = rs.getString("deskripsiBangunan");
+                String status = rs.getString("statusJualSewa");
+                String harga = String.valueOf(rs.getInt("harga"));
+                String tipe = rs.getString("tipeProperty");
+                String luasBangunan = String.valueOf(rs.getInt("luasBangunan"));
+                String luasTanah = String.valueOf(rs.getInt("luasTanah"));
+                String jumlahKamar = String.valueOf(rs.getInt("jumlahKamar"));
+                
+                data[row][0] = id;
+                data[row][1] = alamat;
+                data[row][2] = deskripsi;
+                data[row][3] = status;
+                data[row][4] = harga;
+                data[row][5] = tipe;
+                data[row][6] = luasBangunan;
+                data[row][7] = luasTanah;
+                data[row][8] = jumlahKamar;
+                row++;
+            }
+            return data;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 
     public Daerah getDaerah(int idDaerah) {
         Daerah daerah = new Daerah();
