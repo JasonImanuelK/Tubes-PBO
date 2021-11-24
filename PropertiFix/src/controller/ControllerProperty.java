@@ -265,4 +265,22 @@ public class ControllerProperty {
 
         return listProperty;
     }
+    
+    public  ArrayList<Property> getAllProperty(){
+        ArrayList<Property> listProperty = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM properti WHERE verifikasi=" + 1 + " ";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                User user = getUserById(rs.getInt("idPengguna"));
+                listProperty.add(new Property(rs.getInt("kodeProperti"), user, getDaerah(rs.getInt("idDaerah")), rs.getString("alamat"), rs.getString("deskripsiBangunan"), StatusJualSewa.valueOf(rs.getString("statusJualSewa")), BigInteger.valueOf(rs.getLong("harga")), TipeProperty.valueOf(rs.getString("tipeProperty")), rs.getInt("luasBangunan"), rs.getInt("luasTanah"), rs.getInt("jumlahKamar"), rs.getBoolean("verifikasi")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listProperty;
+    }
 }

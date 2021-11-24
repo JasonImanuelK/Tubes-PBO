@@ -9,11 +9,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Property;
+import controller.ControllerProperty;
+import java.math.BigInteger;
 
 /**
  *
@@ -23,7 +27,8 @@ public class MenuAdmin {
     JFrame frame;
     JPanel panel;
     JLabel labelJudul;
-    JButton btnProperty,btnDaerah,btnInputDaerah,btnUser,btnTransaksi, btnLogOut;
+    JButton btnLihatProperty,btnDaerah,btnInputDaerah,btnUser,btnTransaksi, btnLogOut;
+    ControllerProperty controllerProperty = new ControllerProperty();
     
     public MenuAdmin(){
         
@@ -64,12 +69,14 @@ public class MenuAdmin {
             }
         });
         
-        btnProperty = new JButton("Lihat Property");
-        btnProperty.setBounds(90, 120, 120, 40);
-        btnProperty.addActionListener(new ActionListener() {
+        btnLihatProperty = new JButton("Lihat Property");
+        btnLihatProperty.setBounds(90, 120, 120, 40);
+        btnLihatProperty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //
+                frame.dispose();
+                ArrayList<Property> listProperty = controllerProperty.getAllProperty();
+                new LihatProperty(listProperty);
             }
         });
         
@@ -97,6 +104,7 @@ public class MenuAdmin {
         btnVerifikasiProperty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.dispose();
                 new VerifikasiProperty();
             }
         });
@@ -123,7 +131,8 @@ public class MenuAdmin {
         panel.add(btnTransaksi);
         panel.add(btnDaerah);
         panel.add(btnInputDaerah);
-        panel.add(btnProperty);
+        panel.add(btnLihatProperty);
+        panel.add(btnVerifikasiProperty);
         panel.add(btnUser);
         panel.add(btnLogOut);
     }

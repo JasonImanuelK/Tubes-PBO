@@ -6,6 +6,8 @@
 package view;
 
 import controller.ControllerProperty;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,6 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import model.Admin;
 import model.Property;
 import model.User;
@@ -27,30 +32,17 @@ public class LihatProperty {
     ControllerProperty controllerProperty = new ControllerProperty();
     
     public LihatProperty(ArrayList<Property> listProperty){ //sebelum kesini query dulu pake getListPropertyUseFilter()
-        frame = new JFrame("Verifikasi Property");
-        frame.setSize(440, 640);
+        frame = new JFrame("Lihat Property");
+        frame.setSize(480, 640);
         frame.setLayout(null);
         frame.setVisible(true);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setVisible(true);
+        panel.setBounds(10, 10, 440, 640);
+            
         
-        if(UserSingeltonManager.getInstance().getPerson() instanceof User){
-            frame.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                    frame.dispose();
-                    new MainMenu();
-                }
-            });
-        }else{
-            frame.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                    frame.dispose();
-                    new MenuAdmin();
-                }
-            });
-        }
-        
-        int height = 10;
+        int height = 30;
         for (int i = 0; i < listProperty.size(); i++) {
             Property property = (listProperty.get(i));
             JLabel labelDaerah = new JLabel("Daerah : " + property.getDaerah().getKota() + ", " + property.getDaerah().getProvinsi());
@@ -102,22 +94,51 @@ public class LihatProperty {
                     }
                 });
                 
-                frame.add(edit);
-                frame.add(delete);
+                panel.add(edit);
+                panel.add(delete);
             }
             
-            frame.add(labelDaerah);
-            frame.add(labelAlamat);
-            frame.add(labelDeskrpsi);
-            frame.add(labelStatusJualSewa);
-            frame.add(labelHarga);
-            frame.add(labelTipeProperty);
-            frame.add(labelLuasBangunan);
-            frame.add(labelLuasTanah);
-            frame.add(labelJumlahKamar);
-            frame.add(labelPemilik);
+            panel.add(labelDaerah);
+            panel.add(labelAlamat);
+            panel.add(labelDeskrpsi);
+            panel.add(labelStatusJualSewa);
+            panel.add(labelHarga);
+            panel.add(labelTipeProperty);
+            panel.add(labelLuasBangunan);
+            panel.add(labelLuasTanah);
+            panel.add(labelJumlahKamar);
+            panel.add(labelPemilik);
             height += 220;
         }
         
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setPreferredSize(new Dimension(panel.getComponent(0).getPreferredSize()));
+        scrollPane.setVisible(true);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        frame.add(scrollPane);
+        
+        JButton back = new JButton("Back");
+        back.setBounds(0, 0, 80, 20);
+        if(UserSingeltonManager.getInstance().getPerson() instanceof User){
+            back.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    new MainMenu();
+                }
+            });
+        }else{
+            back.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    new MenuAdmin();
+                }
+            });
+        }
+        
+        frame.add(back);
+//        frame.add(panel);
     }
 }

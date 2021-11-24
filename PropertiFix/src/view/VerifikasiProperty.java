@@ -27,29 +27,12 @@ public class VerifikasiProperty {
     
     public VerifikasiProperty(){
         frame = new JFrame("Verifikasi Property");
-        frame.setSize(440, 640);
+        frame.setSize(500, 670);
         frame.setLayout(null);
         frame.setVisible(true);
         
-        if(UserSingeltonManager.getInstance().getPerson() instanceof User){
-            frame.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                    frame.dispose();
-                    new MainMenu();
-                }
-            });
-        }else{
-            frame.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                    frame.dispose();
-                    new MenuAdmin();
-                }
-            });
-        }
         
-        int height = 10;
+        int height = 30;
         ArrayList<Property> listProperty = controllerProperty.getListPropertyBelumTerverifikasi();
         for (int i = 0; i < listProperty.size(); i++) {
             Property property = (listProperty.get(i));
@@ -73,7 +56,7 @@ public class VerifikasiProperty {
             labelJumlahKamar.setBounds(10, height+160, 300, 20);
             
             JButton delete = new JButton("Delete");
-            delete.setBounds(250, height+85, 80, 40);
+            delete.setBounds(240, height+85, 80, 40);
             delete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -88,7 +71,7 @@ public class VerifikasiProperty {
             });
             
             JButton verifikasi = new JButton("Verifikasi");
-            verifikasi.setBounds(350, height+85, 80, 40);
+            verifikasi.setBounds(330, height+85, 120, 40);
             verifikasi.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -115,6 +98,29 @@ public class VerifikasiProperty {
             frame.add(delete);
             height += 220;
         }
+        
+        JButton back = new JButton("Back");
+        back.setBounds(0, 0, 80, 20);
+        if(UserSingeltonManager.getInstance().getPerson() instanceof User){
+            back.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    new MainMenu();
+                }
+            });
+        }else{
+            back.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    new MenuAdmin();
+                }
+            });
+        }
+        
+        frame.add(back);
     }
+    
     
 }

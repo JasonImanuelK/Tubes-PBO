@@ -79,7 +79,7 @@ public class SearchWilayah {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                new Login();
+                new MainMenu();
             }
         });
         
