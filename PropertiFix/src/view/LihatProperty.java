@@ -88,7 +88,7 @@ public class LihatProperty {
                         frame.dispose();
                         if(controllerProperty.deleteProperty(property)){
                             JOptionPane.showMessageDialog(null, "Delete berhasil");
-                            new VerifikasiProperty();
+                            new MenuAdmin();
                         }else{
                             JOptionPane.showMessageDialog(null, "Delete gagal");
                         }
