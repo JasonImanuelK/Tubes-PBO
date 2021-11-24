@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -113,8 +115,23 @@ public class FilterProperty {
         //button
         buttonSearch = new JButton("Search");
         buttonSearch.setBounds(80, 330, 130, 40);
+        buttonSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameFilter.dispose();
+                //lihatProperty
+            }
+        });
+        
         buttonBack = new JButton("Back");
         buttonBack.setBounds(210, 330, 130, 40);
+        buttonBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameFilter.dispose();
+                new MainMenu();
+            }
+        });
 
         //add panel
         panelFilter.add(labelSearchJudul);

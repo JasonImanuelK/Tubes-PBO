@@ -37,7 +37,7 @@ public class LihatPropertyUser {
             }
         });
         
-        int height = 10;
+        int height = 30;
         ArrayList<Property> listProperty = controllerProperty.getListPropertyUser();
         for (int i = 0; i < listProperty.size(); i++) {
             Property property = (listProperty.get(i));
@@ -92,6 +92,18 @@ public class LihatPropertyUser {
             frame.add(edit);
             height += 220;
         }
+        
+        JButton back = new JButton("Back");
+        back.setBounds(0, 0, 80, 20);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new MainMenu();
+            }
+        });
+        
+        frame.add(back);
     }
     
 }

@@ -88,7 +88,7 @@ public class MainMenu {
         });
         
         JButton btnLihatPropertyUser = new JButton("Lihat Property User");
-        btnLihatPropertyUser.setBounds(90, 120, 120, 40);
+        btnLihatPropertyUser.setBounds(90, 120, 180, 40);
         btnLihatPropertyUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,7 +113,7 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameMenu.dispose();
-                //masuk ke filter
+                new FilterProperty();
             }
         });
 //        
