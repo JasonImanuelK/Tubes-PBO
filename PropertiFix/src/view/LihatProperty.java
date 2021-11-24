@@ -98,6 +98,19 @@ public class LihatProperty implements InterfacePesan{
                 
                 panel.add(edit);
                 panel.add(delete);
+            } else {
+                if(!pemilikProperty.getNama().equals(UserSingeltonManager.getInstance().getPerson().getNama())&&!pemilikProperty.getNoTelp().equals(UserSingeltonManager.getInstance().getPerson().getNoTelp())){
+                JButton Transaksi = new JButton("Transaksi");
+                Transaksi.setBounds(250, height+85, 80, 40);
+                Transaksi.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame.dispose();
+                        new FormProperty(property);
+                    }
+                });
+                panel.add(Transaksi);
+                }
             }
             
             panel.add(labelDaerah);

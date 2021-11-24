@@ -19,5 +19,6 @@ public class Main {
     public static void main(String[] args) {
 //        new view.MenuAdmin();
           new view.Login();
+//        new view.TransaksiProperty(1);
     }
 }

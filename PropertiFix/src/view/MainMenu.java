@@ -92,7 +92,7 @@ public class MainMenu {
         });
         
         JButton btnLihatPropertyUser = new JButton("Lihat Property User");
-        btnLihatPropertyUser.setBounds(90, 120, 180, 40);
+        btnLihatPropertyUser.setBounds(90, 120, 120, 40);
         btnLihatPropertyUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,12 +112,22 @@ public class MainMenu {
         });
 //        
         JButton btnLihatProperty = new JButton("Lihat Semua Property");
-        btnLihatProperty.setBounds(150, 180, 140, 40);
+        btnLihatProperty.setBounds(150, 120, 140, 40);
         btnLihatProperty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameMenu.dispose();
                 new FilterProperty();
+            }
+        });
+//      
+        JButton btnLihatTransaksi = new JButton("Lihat Transaksi");
+        btnLihatTransaksi.setBounds(150, 240, 140, 40);
+        btnLihatTransaksi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.dispose();
+                
             }
         });
 //        
