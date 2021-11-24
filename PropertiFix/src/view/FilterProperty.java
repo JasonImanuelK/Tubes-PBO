@@ -137,13 +137,13 @@ public class FilterProperty {
         sliderLuasTanahMin.setBounds(220, 320, 200, 40);
         sliderLuasTanahMax = new JSlider(JSlider.HORIZONTAL,0,99999,99999);
         sliderLuasTanahMax.setBounds(220, 360, 200, 40);
-        sliderJumlahKamarMin = new JSlider(JSlider.HORIZONTAL,0,99999,0);
+        sliderJumlahKamarMin = new JSlider(JSlider.HORIZONTAL,0,1000,0);
         sliderJumlahKamarMin.setBounds(220, 400, 200, 40);
         sliderJumlahKamarMax = new JSlider(JSlider.HORIZONTAL,0,1000,1000);
         sliderJumlahKamarMax.setBounds(220, 440, 200, 40);
         height = 400;
         for (int i = 0; i < 2; i++) {
-            JLabel label = new JLabel("99999");
+            JLabel label = new JLabel("1000");
             label.setBounds(420, height-3, 200, 20);
             panelFilter.add(label);
             height+=40; 

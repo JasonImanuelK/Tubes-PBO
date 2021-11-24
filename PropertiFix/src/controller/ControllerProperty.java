@@ -283,4 +283,28 @@ public class ControllerProperty {
 
         return listProperty;
     }
+    
+    
+    public boolean cekJumlahPropertyUser(){
+        User user = (User) UserSingeltonManager.getInstance().getPerson();
+        
+        int jumlah = 0;
+        conn.connect();
+        String query = "SELECT COUNT(*) AS total FROM properti WHERE idPengguna=" + getIdUser(user) + "";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+               jumlah = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        if((user.getMember() == Member.BRONZE && jumlah < 2) || (user.getMember() == Member.SILVER && jumlah < 5) || user.getMember() == Member.GOLD){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
