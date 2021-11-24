@@ -231,7 +231,6 @@ public class FormProperty implements InterfacePesan{
                     
                     if(controllerProperty.updateProperty(property)){
                         JOptionPane.showMessageDialog(null, updateBerhasil);
-                        new LihatPropertyUser();
                     }else{
                         JOptionPane.showMessageDialog(null, updateGagal);
                     }
@@ -245,7 +244,12 @@ public class FormProperty implements InterfacePesan{
                     if(controllerProperty.deleteProperty(property)){
                         frame.dispose();
                         JOptionPane.showMessageDialog(null, hapusBerhasil);
-                        new LihatPropertyUser();
+                        if(UserSingeltonManager.getInstance().getPerson() instanceof User){
+                            new LihatPropertyUser();
+                        }else{
+                            ArrayList<Property> listProperty = controllerProperty.getAllProperty();
+                            new LihatProperty(listProperty);
+                        }
                     }else{
                         JOptionPane.showMessageDialog(null, hapusGagal);
                     }
@@ -255,7 +259,13 @@ public class FormProperty implements InterfacePesan{
             btnBack.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new LihatPropertyUser();
+                    frame.dispose();
+                    if(UserSingeltonManager.getInstance().getPerson() instanceof User){
+                        new LihatPropertyUser();
+                    }else{
+                        ArrayList<Property> listProperty = controllerProperty.getAllProperty();
+                        new LihatProperty(listProperty);
+                    }
                 }
             });
         }else{
