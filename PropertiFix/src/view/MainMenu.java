@@ -67,15 +67,15 @@ public class MainMenu {
         
         
         //Button
-//        JButton btnDaerah = new JButton("Lihat Daerah");
-//        btnDaerah.setBounds(90, 240, 120, 40);
-//        btnDaerah.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                frameMenu.setVisible(false);
-////                new TampilanWilayah(frameMenu);
-//            }
-//        });
+        JButton btnDaerah = new JButton("Lihat Wilayah");
+        btnDaerah.setBounds(90, 240, 120, 40);
+        btnDaerah.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameMenu.setVisible(false);
+                new SearchWilayah();
+            }
+        });
         
         JButton btnInputProperti = new JButton("Input Properti");
         btnInputProperti.setBounds(220, 240, 120, 40);
@@ -137,7 +137,7 @@ public class MainMenu {
         frameMenu.add(panel);
         panel.add(labelJudul);
         panel.add(btnInputProperti);
-//        panel.add(btnDaerah);
+        panel.add(btnDaerah);
         panel.add(btnLihatProperty);
         panel.add(btnLihatPropertyUser);
         panel.add(buttonEditProfile);

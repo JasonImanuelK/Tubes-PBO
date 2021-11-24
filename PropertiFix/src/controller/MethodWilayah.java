@@ -65,6 +65,40 @@ public class MethodWilayah {
         return listWilayah;
     }
     
+    public ArrayList<Wilayah> getWilayahYangDicari(String provinsi, String kota){
+        String query = "SELECT * FROM daerah WHERE provinsi LIKE ? AND kota LIKE ?";
+        ArrayList<Wilayah> listWilayah= new ArrayList<>(); 
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, "%"+provinsi+"%");
+            stmt.setString(2, "%"+kota+"%");
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                String deskripsi = cariDeskripsi(rs.getInt("idDaerah"));
+                listWilayah.add(new Wilayah(rs.getString("provinsi"),rs.getString("kota"),deskripsi));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listWilayah;
+    }
+    
+    private String cariDeskripsi(int idDaerah){
+        String query = "SELECT deskripsiWilayah FROM wilayah WHERE idDaerah = ?";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1,idDaerah);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getString("deskripsiWilayah");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    
     public ArrayList<String> getStringDaerah(){
         String query = "SELECT * FROM daerah";
         ArrayList<String> listDaerah= new ArrayList<>(); 
@@ -80,7 +114,7 @@ public class MethodWilayah {
         return listDaerah;
     }
     
-    public int getIdDaerahTerakhir() {
+    private int getIdDaerahTerakhir() {
         String query = "SELECT idDaerah FROM daerah ORDER BY idDaerah DESC LIMIT 2";
         int jumlah = 0;
         try {

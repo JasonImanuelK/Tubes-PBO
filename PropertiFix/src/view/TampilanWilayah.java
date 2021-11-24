@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import model.Daerah;
 import controller.MethodWilayah;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
@@ -31,6 +28,7 @@ public class TampilanWilayah {
     JPanel panelButton;
     JButton btnBack;
     MethodWilayah met = new MethodWilayah();
+    
     public TampilanWilayah(JFrame frameMenu){
         //Frame
         frame = new JFrame("Deskripsi Wilayah");
@@ -89,5 +87,50 @@ public class TampilanWilayah {
         
         
     }
+    
+    public TampilanWilayah(String provinsi,String kota){
+        //Frame
+        frame = new JFrame("Deskripsi Wilayah");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        panelButton = new JPanel();
+        panelButton.setSize(200, 200);
+        panelButton.setBackground(new Color(201, 248, 201));
+        
+        btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new SearchWilayah();
+            }
+        });
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        ArrayList <Wilayah> listWilayah = met.getWilayahYangDicari(provinsi,kota);
+        
+        if(listWilayah.size() == 0){
+            
+        }
+        else{
+            for(int i = 0;i < listWilayah.size();i++){
+                JLabel labelProvinsi = new JLabel(listWilayah.get(i).getProvinsi());
+                JLabel labelKota = new JLabel(listWilayah.get(i).getKota());
+                JLabel labelDeskripsi = new JLabel(listWilayah.get(i).getDeskripsiWilayah());
+                
+                frame.add(new GroupPanel(i,labelProvinsi,labelKota,labelDeskripsi));
+            }
+        }
+        
+        panelButton.add(btnBack);
+        frame.add(panelButton);
+        frame.add(Box.createVerticalGlue());
+        frame.pack();
+        panelButton.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        
+    }
+    
     
 }
