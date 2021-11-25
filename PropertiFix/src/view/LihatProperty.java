@@ -6,6 +6,7 @@
 package view;
 
 import controller.ControllerProperty;
+import controller.MethodTransaksi;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.ScrollPane;
@@ -97,6 +98,20 @@ public class LihatProperty implements InterfacePesan{
                 
                 panel.add(edit);
                 panel.add(delete);
+            } else {
+                MethodTransaksi controlTransaksi = new MethodTransaksi();
+                if(!pemilikProperty.getNama().equals(UserSingeltonManager.getInstance().getPerson().getNama())&&!pemilikProperty.getNoTelp().equals(UserSingeltonManager.getInstance().getPerson().getNoTelp())&&!controlTransaksi.checkStatusProperty(property)){
+                JButton Transaksi = new JButton("Transaksi");
+                Transaksi.setBounds(250, height+85, 80, 40);
+                Transaksi.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame.dispose();
+                        new TransaksiProperty(property);
+                    }
+                });
+                panel.add(Transaksi);
+                }
             }
             
             panel.add(labelDaerah);

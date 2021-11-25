@@ -12,12 +12,42 @@ import java.util.ArrayList;
  * @author patri
  */
 public class Transaksi {
+    private int idTransaksi;
+    private int idPengguna;
+    private int idProperty;
     private JenisPembayaran jenispembayaran;
     private Status_Pembayaran statuspembayaran;
     
-    Transaksi(JenisPembayaran jenispembayaran,Status_Pembayaran statuspembayaran){
+    public Transaksi(int idTransaksi,int idPengguna, int idProperty,JenisPembayaran jenispembayaran,Status_Pembayaran statuspembayaran){
+        this.idTransaksi = idTransaksi;
+        this.idPengguna = idPengguna;
+        this.idProperty = idProperty;
         this.jenispembayaran = jenispembayaran;
         this.statuspembayaran = statuspembayaran;
+    }
+
+    public int getIdTransaksi() {
+        return idTransaksi;
+    }
+
+    public void setIdTransaksi(int idTransaksi) {
+        this.idTransaksi = idTransaksi;
+    }
+
+    public int getIdPengguna() {
+        return idPengguna;
+    }
+
+    public void setIdPengguna(int idPengguna) {
+        this.idPengguna = idPengguna;
+    }
+
+    public int getIdProperty() {
+        return idProperty;
+    }
+
+    public void setIdProperty(int idProperty) {
+        this.idProperty = idProperty;
     }
     
     public JenisPembayaran getJenispembayaran(){
