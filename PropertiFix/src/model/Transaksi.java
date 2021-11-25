@@ -19,6 +19,9 @@ public class Transaksi {
     private Status_Pembayaran statuspembayaran;
     
     public Transaksi(int idTransaksi,int idPengguna, int idProperty,JenisPembayaran jenispembayaran,Status_Pembayaran statuspembayaran){
+        this.idTransaksi = idTransaksi;
+        this.idPengguna = idPengguna;
+        this.idProperty = idProperty;
         this.jenispembayaran = jenispembayaran;
         this.statuspembayaran = statuspembayaran;
     }

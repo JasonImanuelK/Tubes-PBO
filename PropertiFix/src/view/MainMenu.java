@@ -6,6 +6,7 @@
 package view;
 
 import controller.ControllerProperty;
+import controller.MethodTransaksi;
 import controller.MethodWilayah;
 import java.awt.Color;
 import java.awt.Font;
@@ -30,6 +31,7 @@ import model.Daerah;
 import model.Property;
 import model.StatusJualSewa;
 import model.TipeProperty;
+import model.Transaksi;
 import model.UserSingeltonManager;
 
 /**

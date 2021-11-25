@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package view;
 
 /**
  *
  * @author patri
  */
-public enum Status_Pembayaran {
-    Lunas, Belum_Lunas;
+public class FormTransaksi {
+    
 }

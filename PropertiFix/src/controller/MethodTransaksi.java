@@ -69,7 +69,7 @@ public class MethodTransaksi {
     }
     
     public boolean insertTransaksi(Property property,String jenisPembayaran){
-        String query = "INSERT INTO Transaksi(idPengguna,idProperti,jenisPembayaran,statusPembayaran) VALUES (?,?,?,'Belum Lunas')";
+        String query = "INSERT INTO Transaksi(idPengguna,idProperti,jenisPembayaran,statusPembayaran) VALUES (?,?,?,'Belum_Lunas')";
         int idPengguna = getIdPengguna();
             try {
                 PreparedStatement stmt = conn.con.prepareStatement(query);
@@ -146,8 +146,10 @@ public class MethodTransaksi {
         }       
     }
     
-    public ArrayList<Transaksi> getListTransaksiUser (){
-        String query = "SELECT * FROM transaksi WHERE idPengguna='"+getIdPengguna()+"'";
+    public ArrayList<Transaksi> getListTransaksi(){
+//        String query = "SELECT * FROM transaksi WHERE idPengguna='"+getIdPengguna()+"'";
+        String query = "SELECT * FROM transaksi JOIN properti WHERE transaksi.idPengguna ='"+getIdPengguna()+"'";
+//        String query = "SELECT * FROM transaksi";
         ArrayList<Transaksi> listTransaksi = new ArrayList<Transaksi>();
         
         try{
@@ -155,7 +157,10 @@ public class MethodTransaksi {
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-                    Transaksi transaksi = new Transaksi(rs.getInt("idTransaksi"),rs.getInt("idPengguna"),rs.getInt("idProperty"),JenisPembayaran.valueOf(rs.getString("jenisPembayaran")),Status_Pembayaran.valueOf(rs.getString("statusPembayaran")));
+                    Transaksi transaksi = new Transaksi(rs.getInt("idTransaksi"),rs.getInt("idPengguna"),rs.getInt("idProperti"),JenisPembayaran.valueOf(rs.getString("jenisPembayaran")),Status_Pembayaran.valueOf(rs.getString("statusPembayaran")));
+//                    System.out.println(rs.getInt("idTransaksi"));
+//                    System.out.println(rs.getInt("idPengguna"));
+//                    System.out.println(rs.getInt("idProperti"));
                     listTransaksi.add(transaksi);
                 }
             }
