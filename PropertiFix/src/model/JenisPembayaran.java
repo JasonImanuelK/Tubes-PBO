@@ -10,5 +10,5 @@ package model;
  * @author patri
  */
 public enum JenisPembayaran {
-    Kredit,Langsung;
+    KREDIT,LANGSUNG;
 }

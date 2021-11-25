@@ -95,7 +95,8 @@ public class MenuAdmin {
         btnTransaksi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //
+                frame.setVisible(false);
+                new LihatTransaksiAdmin();
             }
         });
         
